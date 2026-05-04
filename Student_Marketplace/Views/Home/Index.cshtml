@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "Student Marketplace";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <link href="~/css/LandingPage.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="auth-root">
+
+        <!-- TOP LEFT LOGO -->
+        <div class="corner-logo corner-logo-left">Vendly.</div>
+
+        <!-- TOP RIGHT LOGO -->
+        <div class="corner-logo corner-logo-right">Vendly.</div>
+
+        <!-- LEFT SIDE — Signup -->
+        <div class="auth-illus auth-illus-left" id="illustLeft">
+            <div class="illus-content">
+
+                <div class="illus-heading">
+                    <div class="illus-heading-outline">WELCOME</div>
+                    <div class="illus-heading-script">Back...</div>
+                </div>
+
+                <p class="illus-tagline">Your campus. Your marketplace.<br />Buy, sell and connect with students.</p>
+
+                <div class="illus-cards">
+                    <div class="illus-card">
+                        <div class="illus-card-icon">📚</div>
+                        <div class="illus-card-label">Textbooks</div>
+                    </div>
+                    <div class="illus-card">
+                        <div class="illus-card-icon">🎓</div>
+                        <div class="illus-card-label">Tutoring</div>
+                    </div>
+                    <div class="illus-card">
+                        <div class="illus-card-icon">💸</div>
+                        <div class="illus-card-label">Zero Fees</div>
+                    </div>
+                </div>
+
+                <img class="illus-img" src="~/images/login_vector.png" alt="" />
+
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE — Signin -->
+        <div class="auth-illus auth-illus-right" id="illustRight">
+            <div class="illus-content">
+
+                <div class="illus-heading">
+                    <div class="illus-heading-outline">WELCOME</div>
+                    <div class="illus-heading-script">Happy to see new faces...</div>
+                </div>
+
+                <p class="illus-tagline">Good to see you again.<br />Pick up right where you left off.</p>
+
+                <div class="illus-cards">
+                    <div class="illus-card">
+                        <div class="illus-card-icon">🛒</div>
+                        <div class="illus-card-label">Browse</div>
+                    </div>
+                    <div class="illus-card">
+                        <div class="illus-card-icon">📦</div>
+                        <div class="illus-card-label">My Listings</div>
+                    </div>
+                    <div class="illus-card">
+                        <div class="illus-card-icon">💬</div>
+                        <div class="illus-card-label">Messages</div>
+                    </div>
+                </div>
+
+                <img class="illus-img" src="~/images/signup_vector.png" alt="" />
+
+            </div>
+        </div>
+
+        <div class="auth-card" id="authCard">
+
+            <!-- SIGNUP PANEL -->
+            <div class="auth-panel" id="signupPanel">
+                <div class="auth-card-title">Create Account</div>
+                <div class="auth-socials">
+                    <button class="auth-social-btn">G+</button>
+                    <button class="auth-social-btn">f</button>
+                    <button class="auth-social-btn">X</button>
+                    <button class="auth-social-btn">in</button>
+                </div>
+                <form asp-action="Register" asp-controller="Account" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="auth-divider">or use your email for registration</div>
+                    <input class="auth-input" type="text" name="FullName" placeholder="Name" />
+                    <input class="auth-input" type="email" name="Email" placeholder="Email" />
+                    <input class="auth-input" type="password" name="Password" placeholder="Password" />
+                    <button type="submit" class="auth-submit">SIGN UP</button>
+                </form>
+                <button type="button" class="auth-switch" id="toSignin">Already have an account?</button>
+            </div>
+
+            <!-- SIGNIN PANEL -->
+            <div class="auth-panel hidden" id="signinPanel">
+                <div class="auth-card-title">Sign In</div>
+                <div class="auth-socials">
+                    <button class="auth-social-btn">G+</button>
+                    <button class="auth-social-btn">f</button>
+                    <button class="auth-social-btn">X</button>
+                    <button class="auth-social-btn">in</button>
+                </div>
+                <form asp-action="Login" asp-controller="Account" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="auth-divider">or use your email password</div>
+                    <input class="auth-input" type="email" name="Email" placeholder="Email" />
+                    <input class="auth-input" type="password" name="Password" placeholder="Password" />
+                    <a class="auth-forgot">Forgot Your Password?</a>
+                    <button type="submit" class="auth-submit">SIGN IN</button>
+                </form>
+                <button type="button" class="auth-switch" id="toSignup">Don't have an account?</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var card = document.getElementById('authCard');
+        var signupPanel = document.getElementById('signupPanel');
+        var signinPanel = document.getElementById('signinPanel');
+
+        document.getElementById('toSignin').addEventListener('click', function () {
+            card.classList.add('slide-right');
+            setTimeout(function () {
+                signupPanel.classList.add('hidden');
+                signinPanel.classList.remove('hidden');
+            }, 250);
+        });
+
+        document.getElementById('toSignup').addEventListener('click', function () {
+            card.classList.remove('slide-right');
+            setTimeout(function () {
+                signinPanel.classList.add('hidden');
+                signupPanel.classList.remove('hidden');
+            }, 250);
+        });
+    </script>
+
+</body>
+</html>
