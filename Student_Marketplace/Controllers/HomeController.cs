@@ -18,6 +18,23 @@ namespace Student_Marketplace.Controllers
             return View();
         }
 
+        public IActionResult Marketplace()
+        {
+            ViewBag.UserName = "Guest";
+            return View();
+        }
+
+        public IActionResult Auth()
+        {
+            return View();
+        }
+
+        public IActionResult SellerDashboard()
+        {
+            ViewBag.BusinessName = "Campus Co.";
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

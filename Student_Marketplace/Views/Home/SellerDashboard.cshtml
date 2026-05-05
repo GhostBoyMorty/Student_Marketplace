@@ -1,0 +1,203 @@
+@{
+    ViewBag.Title = "Seller Dashboard";
+    Layout = null;
+    var businessName = ViewBag.BusinessName ?? "Campus Co.";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="~/css/SellerDashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dashboard-page">
+        <div class="page-back-nav">
+            <a href="@Url.Action("Index", "Home")" class="back-btn">← Back to Landing</a>
+        </div>
+        <div class="dashboard-shell">
+            <aside class="dashboard-sidebar">
+                <div class="sidebar-card">
+                    <div class="sidebar-profile">
+                        <div class="sidebar-avatar">V</div>
+                        <p class="sidebar-name">@businessName</p>
+                        <p class="sidebar-claim">Verified Seller • DUT Student</p>
+                    </div>
+                </div>
+                <nav class="sidebar-card">
+                    <div class="section-heading">Seller Menu</div>
+                    <div class="nav-link-list">
+                        <a class="nav-link active" href="#">Dashboard</a>
+                        <a class="nav-link" href="#">My Listings</a>
+                        <a class="nav-link" href="#">Add New Listing</a>
+                        <a class="nav-link" href="#">Orders</a>
+                        <a class="nav-link" href="#">Messages</a>
+                        <a class="nav-link" href="#">Promote</a>
+                    </div>
+                </nav>
+            </aside>
+
+            <main class="dashboard-main">
+                <div class="dashboard-top">
+                    <div class="dashboard-greeting">
+                        <h1>Welcome back, @businessName</h1>
+                        <p>Manage your store, respond to orders, and keep your campus business moving with a student-friendly seller workflow.</p>
+                        <div class="tag-group">
+                            <span class="tag-pill">Verified</span>
+                            <span class="tag-pill">Premium-ready</span>
+                        </div>
+                    </div>
+                    <div class="top-actions">
+                        <button type="button">Notifications</button>
+                        <a href="@Url.Action("Marketplace", "Home")">View Public Storefront</a>
+                    </div>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <span>Total Views</span>
+                        <p class="metric-value">8.2k</p>
+                    </div>
+                    <div class="metric-card">
+                        <span>Active Inquiries</span>
+                        <p class="metric-value">21</p>
+                    </div>
+                    <div class="metric-card">
+                        <span>Completed Sales</span>
+                        <p class="metric-value">58</p>
+                    </div>
+                </div>
+
+                <section class="orders-section">
+                    <div class="section-strip">
+                        <h2>Order Status</h2>
+                        <button type="button">Review All</button>
+                    </div>
+                    <div class="card-row">
+                        <div class="status-card">
+                            <strong>7</strong>
+                            <span>New Inquiries</span>
+                        </div>
+                        <div class="status-card">
+                            <strong>12</strong>
+                            <span>Pending Meetups</span>
+                        </div>
+                        <div class="status-card">
+                            <strong>5</strong>
+                            <span>Completed Sales</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="messages-section">
+                    <div class="section-strip">
+                        <h2>Recent Communications</h2>
+                        <button type="button">Open Inbox</button>
+                    </div>
+                    <div class="card-row">
+                        <div class="message-card">
+                            <div class="message-meta">
+                                <strong>Leila • Course Notes</strong>
+                                <small>2m ago</small>
+                            </div>
+                            <p>“Can we meet on campus tomorrow for the textbooks?”</p>
+                        </div>
+                        <div class="message-card">
+                            <div class="message-meta">
+                                <strong>Sipho • Tutoring</strong>
+                                <small>34m ago</small>
+                            </div>
+                            <p>“I’m ready to confirm the session and pay via checkout.”</p>
+                        </div>
+                        <div class="message-card">
+                            <div class="message-meta">
+                                <strong>Admin • Promotion</strong>
+                                <small>1h ago</small>
+                            </div>
+                            <p>“Your premium listing is approved and live for the weekend.”</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="listings-section">
+                    <div class="section-strip">
+                        <h2>Manage Listings</h2>
+                        <button type="button">Add New Item</button>
+                    </div>
+                    <div class="listing-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>📚</td>
+                                    <td>Secondhand Textbooks</td>
+                                    <td>R220</td>
+                                    <td>Live</td>
+                                    <td><button type="button">Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td>🎧</td>
+                                    <td>Headphone Repair</td>
+                                    <td>R150</td>
+                                    <td>Pending</td>
+                                    <td><button type="button">Delete</button></td>
+                                </tr>
+                                <tr>
+                                    <td>🖥️</td>
+                                    <td>Graphic Design Package</td>
+                                    <td>R320</td>
+                                    <td>Live</td>
+                                    <td><button type="button">Edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="create-card">
+                    <div class="section-heading">Quick Add Listing</div>
+                    <div class="form-row">
+                        <label>Title</label>
+                        <input type="text" placeholder="Product or service title" />
+                    </div>
+                    <div class="form-row">
+                        <label>Description</label>
+                        <textarea placeholder="Describe the item and pickup details"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <label>Price</label>
+                        <input type="text" placeholder="R0.00" />
+                    </div>
+                    <div class="form-row">
+                        <label>Category</label>
+                        <select>
+                            <option>Textbooks</option>
+                            <option>Electronics</option>
+                            <option>Tutoring</option>
+                            <option>Clothing</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Upload Image</label>
+                        <input type="file" />
+                    </div>
+                    <div class="form-actions">
+                        <button type="button">Publish</button>
+                        <button type="button" class="secondary-button">Save Draft</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

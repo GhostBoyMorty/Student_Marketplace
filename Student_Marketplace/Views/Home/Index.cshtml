@@ -94,6 +94,11 @@
                     <button class="auth-social-btn">X</button>
                     <button class="auth-social-btn">in</button>
                 </div>
+                <div class="auth-action-links">
+                    <a class="auth-action-btn" href="@Url.Action("Auth", "Home")">LOGIN / SIGN UP</a>
+                    <a class="auth-action-btn" href="@Url.Action("SellerDashboard", "Home")">GO TO SELLER DASHBOARD</a>
+                    <a class="auth-action-btn" href="@Url.Action("Marketplace", "Home")">CONTINUE AS GUEST</a>
+                </div>
                 <form asp-action="Register" asp-controller="Account" method="post">
                     @Html.AntiForgeryToken()
                     <div class="auth-divider">or use your email for registration</div>
@@ -126,6 +131,7 @@
             </div>
 
         </div>
+
     </div>
 
     <script>
