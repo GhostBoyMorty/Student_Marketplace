@@ -1,3 +1,5 @@
+using Student_Marketplace.Hubs;
+
 namespace Student_Marketplace
 {
     public class Program
@@ -8,6 +10,8 @@ namespace Student_Marketplace
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -25,6 +29,7 @@ namespace Student_Marketplace
             app.UseRouting();
 
             app.UseAuthorization();
+            app.MapHub<ChatHub>("/chatHub");
 
             app.MapControllerRoute(
                 name: "default",
