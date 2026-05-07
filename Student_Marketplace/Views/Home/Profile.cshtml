@@ -1,0 +1,352 @@
+@{
+    ViewBag.Title = "Seller Profile - Vendly";
+    Layout = null;
+    var seller = ViewBag.Seller;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <link href="~/css/LandingPage.css" rel="stylesheet" />
+    <link href="~/css/Profile.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="profile-page">
+        <div class="profile-topbar">
+            <div class="profile-breadcrumbs">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+                <span>Business Profile</span>
+            </div>
+            <div class="profile-page-actions">
+                <a class="btn-secondary" href="@Url.Action("SellerDashboard", "Home")">Seller Dashboard</a>
+                <a class="btn-secondary" href="@Url.Action("Settings", "Home")">Settings</a>
+            </div>
+        </div>
+
+        <!-- Profile Header -->
+        <header class="profile-header">
+            <div class="profile-hero">
+                <div class="profile-avatar-section">
+                    <div class="profile-avatar">
+                        <img src="@seller.AvatarUrl" alt="@seller.BusinessName" />
+                        @if (seller.IsVerified)
+                        {
+                            <div class="verification-badge">
+                                <span class="verified-icon">✓</span>
+                                <span class="verified-text">Verified DUT Student</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="business-name">@seller.BusinessName</h1>
+                        <p class="profile-helper">A complete seller storefront showing live offerings, ratings, delivery details, and contact options.</p>
+                        <div class="profile-meta">
+                            <span class="rating">⭐ @seller.Rating</span>
+                            <span class="divider">•</span>
+                            <span class="reviews">@seller.TotalReviews reviews</span>
+                            <span class="divider">•</span>
+                            <span class="campus">@seller.Campus</span>
+                        </div>
+                        <p class="business-bio">@seller.Bio</p>
+                        <div class="profile-actions">
+                            <button class="btn-primary" type="button" onclick="sendProfileInquiry()">Contact Seller</button>
+                            <button class="btn-secondary" type="button" onclick="toggleFollow()" id="followBtn">Follow</button>
+                            <button class="btn-secondary" type="button" onclick="shareProfile()">Share Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">@seller.TotalSales</div>
+                        <div class="stat-label">Total orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">@seller.Followers</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">@seller.ListingsCount</div>
+                        <div class="stat-label">Listings</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Seller's Listings -->
+        <main class="profile-main">
+            <div class="profile-content">
+                <div class="detail-grid">
+                    <div class="detail-card">
+                        <h3>Contact</h3>
+                        <p><strong>Email:</strong> @seller.Email</p>
+                        <p><strong>Phone:</strong> @seller.Phone</p>
+                        <p><strong>Address:</strong> @seller.Address</p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>Delivery</h3>
+                        <p><strong>Radius:</strong> @seller.DeliveryRadius</p>
+                        <p><strong>Hours:</strong> @seller.OpenHours</p>
+                        <p><strong>Campus:</strong> @seller.Campus</p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>Seller tags</h3>
+                        <div class="seller-tags">
+                            @foreach (var category in seller.Categories)
+                            {
+                                <span class="seller-tag">@category</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>@seller.BusinessName's Listings</h2>
+                    <p>Explore available products and services from this seller.</p>
+                </div>
+
+                <div class="listings-grid">
+                    @if (seller.SellerId == "demo-seller" || seller.SellerId == "nomsa-seller")
+                    {
+                        <!-- Campus Eats listings -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Chicken Wrap Meal</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R45</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (23 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1541599468348-e96984315621?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Veggie Bowl Special</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R38</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (31 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1559054663-459c4dd2e9c1?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Breakfast Sandwich</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R32</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (18 reviews)</p>
+                            </div>
+                        </article>
+                    }
+                    else if (seller.SellerId == "thabo-seller")
+                    {
+                        <!-- Thabo's textbook listings -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Secondhand Textbooks</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R220</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (12 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Engineering Notes Bundle</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R150</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.7 (8 reviews)</p>
+                            </div>
+                        </article>
+                    }
+                    else if (seller.SellerId == "zinhle-seller")
+                    {
+                        <!-- Zinhle's repair listings -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Phone Repair Service</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R180</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (18 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Laptop Screen Replacement</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R450</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (15 reviews)</p>
+                            </div>
+                        </article>
+                    }
+                    else if (seller.SellerId == "innocent-seller")
+                    {
+                        <!-- Innocent's design listings -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Graphic Design Bundle</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R350</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.7 (24 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Logo Design Package</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R500</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (12 reviews)</p>
+                            </div>
+                        </article>
+                    }
+                    else if (seller.SellerId == "siya-seller")
+                    {
+                        <!-- Siya's tutoring listings -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1534751516642-a1af1ef134f0?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Math Tutoring Sessions</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R130</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (20 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Statistics Help</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R150</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (15 reviews)</p>
+                            </div>
+                        </article>
+                    }
+                    else
+                    {
+                        <!-- Default listings for other sellers -->
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1564069114553-7215820c3a86?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>@seller.BusinessName Service</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R200</p>
+                                <p class="listing-seller">by @seller.BusinessName <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ @seller.Rating (@seller.TotalReviews reviews)</p>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bookmarks = JSON.parse(localStorage.getItem('vendly-bookmarks') || '[]');
+            document.querySelectorAll('.bookmark').forEach((btn, idx) => {
+                const listingKey = `profile-listing-${idx}`;
+                if (bookmarks.includes(listingKey)) {
+                    btn.style.opacity = '1';
+                    btn.style.color = '#e91e63';
+                }
+                btn.addEventListener('click', function() {
+                    const isBookmarked = bookmarks.includes(listingKey);
+                    if (isBookmarked) {
+                        const index = bookmarks.indexOf(listingKey);
+                        bookmarks.splice(index, 1);
+                        btn.style.opacity = '0.6';
+                        btn.style.color = '';
+                    } else {
+                        bookmarks.push(listingKey);
+                        btn.style.opacity = '1';
+                        btn.style.color = '#e91e63';
+                    }
+                    localStorage.setItem('vendly-bookmarks', JSON.stringify(bookmarks));
+                });
+            });
+
+            const followBtn = document.getElementById('followBtn');
+            const profileKey = 'vendly-follow-@seller.SellerId';
+            const following = JSON.parse(localStorage.getItem(profileKey) || 'false');
+            updateFollowState(following);
+            followBtn?.addEventListener('click', function() {
+                const current = JSON.parse(localStorage.getItem(profileKey) || 'false');
+                localStorage.setItem(profileKey, JSON.stringify(!current));
+                updateFollowState(!current);
+            });
+        });
+
+        function sendProfileInquiry() {
+            const message = prompt('Enter a quick message for the seller:');
+            if (message) {
+                alert('Your message has been sent to the seller.');
+            }
+        }
+
+        function toggleFollow() {
+            const followBtn = document.getElementById('followBtn');
+            const profileKey = 'vendly-follow-@seller.SellerId';
+            const current = JSON.parse(localStorage.getItem(profileKey) || 'false');
+            localStorage.setItem(profileKey, JSON.stringify(!current));
+            updateFollowState(!current);
+        }
+
+        function updateFollowState(isFollowing) {
+            const followBtn = document.getElementById('followBtn');
+            if (!followBtn) return;
+            followBtn.textContent = isFollowing ? 'Following' : 'Follow';
+            followBtn.style.background = isFollowing ? '#4338ca' : '#fff';
+            followBtn.style.color = isFollowing ? '#fff' : '#4338ca';
+            followBtn.style.border = '1px solid #4338ca';
+        }
+
+        function shareProfile() {
+            navigator.clipboard.writeText(window.location.href)
+                .then(() => alert('Profile URL copied to clipboard!'))
+                .catch(() => alert('Copy failed; please copy the address bar manually.'));
+        }
+    </script>
+</body>
+</html>

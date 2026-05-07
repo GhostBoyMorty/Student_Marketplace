@@ -1,0 +1,232 @@
+@{
+    ViewBag.Title = "Authentication";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <link href="~/css/Auth.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="auth-page">
+        <section class="auth-hero">
+            <div class="auth-hero-top">
+                <div class="brand-label">Vendly.</div>
+                <div class="badge-pill">Student Verified Only</div>
+            </div>
+
+            <div>
+                <h1 class="hero-heading">Join the trusted campus marketplace.</h1>
+                <p class="hero-copy">A secure onboarding experience designed exclusively for verified students: find deals, sell confidently, and connect with your campus community.</p>
+
+                <div class="hero-pills">
+                    <span class="hero-pill">Trust</span>
+                    <span class="hero-pill">Convenience</span>
+                    <span class="hero-pill">Community</span>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src="~/images/login_vector.png" alt="Student marketplace onboarding illustration" />
+            </div>
+        </section>
+
+        <section class="auth-form-shell">
+            <div class="page-back-nav" style="position: absolute; top: 20px; right: 40px; z-index: 30;">
+                <a href="@Url.Action("Index", "Home")" class="back-btn">← Back</a>
+            </div>
+            <div class="auth-form-header">
+                <div>
+                    <h2 class="auth-form-heading">Authentication &amp; Onboarding</h2>
+                    <p class="auth-form-desc">Choose whether you want to browse as a guest, log in to your account, or create a verified student seller profile.</p>
+                </div>
+            </div>
+
+            <div class="page-navigation">
+                <div class="nav-panel-header">
+                    <p class="nav-panel-copy">Quick access to core pages, seller tools, and upcoming features—so you can move through the marketplace faster.</p>
+                </div>
+                <div class="nav-section">
+                    <h4 class="nav-section-title">🏠 Core Pages</h4>
+                    <p class="nav-description">Navigate to the main user-facing pages for browsing, signing in, and marketplace access.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn" href="@Url.Action("Index", "Home")">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-label">Landing Page</span>
+                        </a>
+                        <a class="nav-page-btn nav-current" href="@Url.Action("Auth", "Home")">
+                            <span class="nav-icon">🔐</span>
+                            <span class="nav-label">Authentication</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("Marketplace", "Home")">
+                            <span class="nav-icon">🛒</span>
+                            <span class="nav-label">Marketplace</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h4 class="nav-section-title">👨‍💼 Seller Pages</h4>
+                    <p class="nav-description">Manage your business profile and seller dashboard with quick links.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+                            <span class="nav-icon">🏪</span>
+                            <span class="nav-label">Business Profile</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("SellerDashboard", "Home")">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Seller Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h4 class="nav-section-title">🔮 Future Pages</h4>
+                    <p class="nav-description">These upcoming features are planned for the next release of the marketplace.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Messages page - Coming Soon!')">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-label">Messages</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Orders page - Coming Soon!')">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-label">My Orders</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Wishlist page - Coming Soon!')">
+                            <span class="nav-icon">❤️</span>
+                            <span class="nav-label">Wishlist</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("Settings", "Home")">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-label">Account Settings</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Help page - Coming Soon!')">
+                            <span class="nav-icon">❓</span>
+                            <span class="nav-label">Help & Support</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Admin page - Coming Soon!')">
+                            <span class="nav-icon">👑</span>
+                            <span class="nav-label">Admin Panel</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="auth-card">
+                <div class="section-heading">LOGIN / SIGN UP</div>
+                <div class="toggle-group">
+                    <button type="button" class="toggle-btn active" data-target="signupForm">Sign Up</button>
+                    <button type="button" class="toggle-btn" data-target="loginForm">Login</button>
+                </div>
+
+                <div id="signupForm" class="form-pane">
+                    <form class="auth-form" asp-action="Register" asp-controller="Account" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="form-row">
+                            <label class="label-muted" for="RegisterName">Full Name</label>
+                            <input class="input-field" type="text" id="RegisterName" name="FullName" placeholder="Your full name" required />
+                        </div>
+                        <div class="form-row">
+                            <label class="label-muted" for="RegisterEmail">Student Email</label>
+                            <input class="input-field" type="email" id="RegisterEmail" name="Email" placeholder="you@student.edu" title="Please use a .edu or student institutional email" required />
+                        </div>
+                        <div class="form-row">
+                            <label class="label-muted" for="RegisterPassword">Password</label>
+                            <input class="input-field" type="password" id="RegisterPassword" name="Password" placeholder="Create a secure password" required />
+                        </div>
+                        <div class="form-row">
+                            <p class="label-muted">I want to</p>
+                            <div class="role-switcher">
+                                <label><input type="radio" name="UserRole" value="Buyer" checked /> Buy</label>
+                                <label><input type="radio" name="UserRole" value="Seller" /> Sell</label>
+                            </div>
+                        </div>
+                        <div class="role-context" id="roleContext">
+                            <p><strong>Buyer:</strong> Browse verified campus deals and checkout quickly.</p>
+                        </div>
+                        <div class="seller-verification-panel hidden" id="sellerVerification">
+                            <p class="label-muted">Seller Verification</p>
+                            <p class="seller-info">Select Sell to unlock your public storefront. Upload your student ID or official credential to get verified and list items or services.</p>
+                            <div class="upload-widget">
+                                <label for="VerificationUpload">Student Verification</label>
+                                <input class="file-field" type="file" id="VerificationUpload" name="VerificationUpload" accept="image/*,.pdf" />
+                                <div class="upload-preview">
+                                    <span>📎</span>
+                                    <div>
+                                        <strong>Upload a student ID or official credential</strong>
+                                        <p style="margin:0; color: #6b7280; font-size:0.92rem;">Accepted formats: JPG, PNG, PDF</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="auth-form-footer">
+                            <button type="submit" class="lead-button auth-submit">Create Account</button>
+                            <div class="auth-support">Seller verification helps unlock the public storefront experience.</div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="loginForm" class="form-pane hidden">
+                    <form class="auth-form" asp-action="Login" asp-controller="Account" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="form-row">
+                            <label class="label-muted" for="LoginEmail">Email</label>
+                            <input class="input-field" type="email" id="LoginEmail" name="Email" placeholder="you@student.edu" required />
+                        </div>
+                        <div class="form-row">
+                            <label class="label-muted" for="LoginPassword">Password</label>
+                            <input class="input-field" type="password" id="LoginPassword" name="Password" placeholder="Enter your password" required />
+                        </div>
+                        <div class="form-row auth-form-footer">
+                            <a class="text-button" href="#">Forgot Password?</a>
+                            <button type="submit" class="lead-button auth-submit">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function updateSellerVerification() {
+            var sellerPanel = document.getElementById('sellerVerification');
+            var roleContext = document.getElementById('roleContext');
+            var selected = document.querySelector('input[name="UserRole"]:checked').value;
+            if (selected === 'Seller') {
+                sellerPanel.classList.remove('hidden');
+                roleContext.innerHTML = '<p><strong>Seller:</strong> Build your storefront, list items and manage transactions from your dashboard.</p>';
+            } else {
+                sellerPanel.classList.add('hidden');
+                roleContext.innerHTML = '<p><strong>Buyer:</strong> Browse verified campus deals and checkout quickly.</p>';
+            }
+        }
+
+        document.querySelectorAll('.toggle-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(function(item) {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.form-pane').forEach(function(pane) {
+                    pane.classList.add('hidden');
+                });
+                button.classList.add('active');
+                var target = button.getAttribute('data-target');
+                var pane = document.getElementById(target);
+                if (pane) {
+                    pane.classList.remove('hidden');
+                }
+            });
+        });
+
+        document.querySelectorAll('input[name="UserRole"]').forEach(function(input) {
+            input.addEventListener('change', updateSellerVerification);
+        });
+
+        updateSellerVerification();
+    </script>
+</body>
+</html>

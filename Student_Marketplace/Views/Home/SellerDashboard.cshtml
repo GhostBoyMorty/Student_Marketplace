@@ -1,0 +1,579 @@
+@{
+    ViewBag.Title = "Seller Dashboard - Vendly";
+    Layout = null;
+    var seller = ViewBag.SellerData;
+    var listings = ViewBag.Listings;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <link href="~/css/LandingPage.css" rel="stylesheet" />
+    <link href="~/css/SellerDashboard.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-top">
+                    <div class="sidebar-title">Dashboard</div>
+                    <div class="sidebar-id">Seller ID: @seller.SellerId</div>
+                </div>
+                <div class="sidebar-profile">
+                    <img src="@seller.AvatarUrl" alt="@seller.BusinessName" class="profile-avatar" />
+                    <div class="profile-info">
+                        <h3>@seller.BusinessName</h3>
+                        <div class="rating">
+                            ⭐ @seller.Rating (@seller.TotalReviews reviews)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-link active">
+                    <span class="nav-icon">📊</span>
+                    Overview
+                </a>
+                <a href="#listings" class="nav-link">
+                    <span class="nav-icon">📦</span>
+                    My Listings
+                </a>
+                <a href="#inquiries" class="nav-link">
+                    <span class="nav-icon">💬</span>
+                    Inquiries
+                    @if (seller.PendingInquiries > 0)
+                    {
+                        <span class="notification-badge">@seller.PendingInquiries</span>
+                    }
+                </a>
+                <a href="#analytics" class="nav-link">
+                    <span class="nav-icon">📈</span>
+                    Analytics
+                </a>
+                <a href="#settings" class="nav-link">
+                    <span class="nav-icon">⚙️</span>
+                    Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="@Url.Action("Index", "Home")" class="logout-btn">
+                    <span class="nav-icon">🚪</span>
+                    Back to Marketplace
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="top-navigation">
+                <div class="top-navigation-title">
+                    <span class="page-title">Dashboard</span>
+                </div>
+                <div class="top-navigation-actions">
+                    <button class="top-action-btn">Notifications (@seller.NotificationsCount)</button>
+                    <button class="top-action-btn">Exports (@seller.ExportRequests)</button>
+                    <span class="top-user">Hi, @seller.BusinessName</span>
+                </div>
+            </div>
+
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h1>Welcome back, @seller.BusinessName!</h1>
+                    <p>Here's what's happening with your business today.</p>
+                    <p class="dashboard-helper">Use the sidebar to manage listings, track inquiries, and review analytics from one place.</p>
+                </div>
+                <div class="header-actions">
+<a class="btn-secondary" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+                    View Business Profile
+                </a>
+                <button class="btn-primary" onclick="showCreateListingModal()">
+                        <span>+</span> Add New Listing
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-banners">
+                <div class="banner-card banner-highlight">
+                    <div>
+                        <h3>Boost your business with Promotions & Daily Deals</h3>
+                        <p>Share your best offers with students and increase order volume.</p>
+                    </div>
+                    <button class="btn-primary">Apply now</button>
+                </div>
+                <div class="banner-card banner-secondary">
+                    <div>
+                        <h3>Increase Sales with Sponsored Product Ads</h3>
+                        <p>Create ads based on customer searches and drive more clicks.</p>
+                    </div>
+                    <button class="btn-primary btn-small">Get started</button>
+                </div>
+            </div>
+
+            <section class="status-summary-grid">
+                <div class="status-card">
+                    <div class="status-title">New</div>
+                    <div class="status-total">@seller.NewOrders</div>
+                    <div class="status-label">Leadtime Orders</div>
+                    <button class="btn-secondary">View</button>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Draft Shipment</div>
+                    <div class="status-total">@seller.DraftShipments</div>
+                    <div class="status-label">Leadtime Orders</div>
+                    <button class="btn-secondary">View</button>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Confirmed Shipment</div>
+                    <div class="status-total">@seller.ConfirmedShipments</div>
+                    <div class="status-label">Leadtime Orders</div>
+                    <button class="btn-secondary">View</button>
+                </div>
+                <div class="status-card">
+                    <div class="status-title">Shipped Shipment</div>
+                    <div class="status-total">@seller.ShippedShipments</div>
+                    <div class="status-label">Leadtime Orders</div>
+                    <button class="btn-secondary">View</button>
+                </div>
+            </section>
+
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section">
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">👁️</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.TotalSales</div>
+                            <div class="metric-label">Total Sales</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📦</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.ActiveListings</div>
+                            <div class="metric-label">Active Listings</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">💬</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.PendingInquiries</div>
+                            <div class="metric-label">Pending Inquiries</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-content">
+                            <div class="metric-value">R@seller.RecentEarnings</div>
+                            <div class="metric-label">This Month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon">🛒</div>
+                            <div class="activity-content">
+                                <p><strong>New order:</strong> Chicken Wrap Meal - R45</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">⭐</div>
+                            <div class="activity-content">
+                                <p><strong>New review:</strong> "Amazing food, fast delivery!" (5⭐)</p>
+                                <span class="activity-time">4 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">💬</div>
+                            <div class="activity-content">
+                                <p><strong>New inquiry:</strong> Custom catering for 20 people</p>
+                                <span class="activity-time">6 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">👀</div>
+                            <div class="activity-content">
+                                <p><strong>Profile viewed:</strong> 15 times today</p>
+                                <span class="activity-time">8 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Listings Management -->
+            <section id="listings" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h2>Manage Your Listings</h2>
+                    <p>Update prices, edit descriptions, or remove listings</p>
+                </div>
+
+                <div class="listings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Listing</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Views</th>
+                                <th>Inquiries</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var listing in listings)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="listing-info">
+                                            <strong>@listing.Title</strong>
+                                        </div>
+                                    </td>
+                                    <td>R@listing.Price</td>
+                                    <td><span class="status-badge status-@listing.Status.ToLower()">@listing.Status</span></td>
+                                    <td>@listing.Views</td>
+                                    <td>@listing.Inquiries</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-edit" onclick="editListing(@listing.Id)">Edit</button>
+                                            <button class="btn-delete" onclick="deleteListing(@listing.Id)">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Inquiries Section -->
+            <section id="inquiries" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h2>Customer Inquiries</h2>
+                    <p>Respond to potential customers and manage conversations</p>
+                </div>
+
+                <div class="inquiries-list">
+                    <div class="inquiry-card">
+                        <div class="inquiry-header">
+                            <div class="inquirer-info">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=40&q=80" alt="Customer" />
+                                <div>
+                                    <strong>Sarah Johnson</strong>
+                                    <span class="inquiry-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <span class="inquiry-status status-unread">Unread</span>
+                        </div>
+                        <div class="inquiry-content">
+                            <p>Hi! I'm interested in your catering service for a birthday party. Can you do 25 people? What's the price per person?</p>
+                        </div>
+                        <div class="inquiry-actions">
+                            <button class="btn-reply" onclick="replyToInquiry(1)">Reply</button>
+                            <button class="btn-mark-read" onclick="markAsRead(1)">Mark as Read</button>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-card">
+                        <div class="inquiry-header">
+                            <div class="inquirer-info">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=40&q=80" alt="Customer" />
+                                <div>
+                                    <strong>Mike Chen</strong>
+                                    <span class="inquiry-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <span class="inquiry-status status-read">Read</span>
+                        </div>
+                        <div class="inquiry-content">
+                            <p>Do you deliver to the Midlands campus? What's your delivery radius?</p>
+                        </div>
+                        <div class="inquiry-actions">
+                            <button class="btn-reply" onclick="replyToInquiry(2)">Reply</button>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-card">
+                        <div class="inquiry-header">
+                            <div class="inquirer-info">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=40&q=80" alt="Customer" />
+                                <div>
+                                    <strong>Linda Nkosi</strong>
+                                    <span class="inquiry-time">1 day ago</span>
+                                </div>
+                            </div>
+                            <span class="inquiry-status status-read">Read</span>
+                        </div>
+                        <div class="inquiry-content">
+                            <p>Thank you for the quick delivery! The food was amazing. Will definitely order again.</p>
+                        </div>
+                        <div class="inquiry-actions">
+                            <button class="btn-reply" onclick="replyToInquiry(3)">Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h2>Performance Analytics</h2>
+                    <p>Track conversions, traffic, and customer engagement in one view.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">🧑‍🤝‍🧑</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.ProfileViews</div>
+                            <div class="metric-label">Profile views</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📥</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.ConversionRate</div>
+                            <div class="metric-label">Conversion rate</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">⭐</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.AverageRating</div>
+                            <div class="metric-label">Average rating</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🕒</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.ResponseTime</div>
+                            <div class="metric-label">Avg. response time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listings-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Last 7 days</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Orders</td>
+                                <td>38</td>
+                                <td>+12%</td>
+                            </tr>
+                            <tr>
+                                <td>Listings viewed</td>
+                                <td>1,250</td>
+                                <td>+8%</td>
+                            </tr>
+                            <tr>
+                                <td>Inquiries received</td>
+                                <td>22</td>
+                                <td>+20%</td>
+                            </tr>
+                            <tr>
+                                <td>Repeat buyers</td>
+                                <td>6</td>
+                                <td>+15%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="dashboard-section hidden">
+                <div class="section-header">
+                    <h2>Dashboard Settings</h2>
+                    <p>Quick adjustments for your store and customer experience.</p>
+                </div>
+
+                <div class="settings-panel">
+                    <div class="metric-card">
+                        <div class="metric-icon">⚙️</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.DeliveryRadius</div>
+                            <div class="metric-label">Delivery radius</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">📍</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.CampusCoverage</div>
+                            <div class="metric-label">Campus coverage</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🔔</div>
+                        <div class="metric-content">
+                            <div class="metric-value">@seller.NotificationChannel</div>
+                            <div class="metric-label">Notification channel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Quick update</h2>
+                        <p>Adjust the fundamentals of your seller experience without leaving the dashboard.</p>
+                    </div>
+                    <div class="form-grid">
+                        <div class="metric-card">
+                            <div class="metric-content">
+                                <p><strong>Keep your profile live.</strong> Update service availability, delivery radius and notifications from your settings page.</p>
+                                <a class="btn-primary" href="@Url.Action("Settings", "Home")">Open Settings Page</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Create Listing Modal -->
+    <div id="createListingModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Listing</h3>
+                <button class="modal-close" onclick="hideCreateListingModal()">×</button>
+            </div>
+            <form class="create-listing-form">
+                <div class="form-group">
+                    <label for="listingTitle">Title</label>
+                    <input type="text" id="listingTitle" placeholder="e.g., Custom Logo Design" required />
+                </div>
+                <div class="form-group">
+                    <label for="listingDescription">Description</label>
+                    <textarea id="listingDescription" placeholder="Describe your product or service..." rows="4" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="listingPrice">Price (R)</label>
+                        <input type="number" id="listingPrice" placeholder="0.00" min="0" step="0.01" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="listingCategory">Category</label>
+                        <select id="listingCategory" required>
+                            <option value="">Select category</option>
+                            <option value="food">Food & Catering</option>
+                            <option value="services">Services</option>
+                            <option value="products">Products</option>
+                            <option value="tutoring">Tutoring</option>
+                            <option value="tech">Technology</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="listingImage">Image URL</label>
+                    <input type="url" id="listingImage" placeholder="https://..." />
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="hideCreateListingModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Listing</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Dashboard functionality
+        const dashboardApp = (() => {
+            function init() {
+                attachEventListeners();
+                updateActiveSection('overview');
+            }
+
+            function attachEventListeners() {
+                // Navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const sectionId = link.getAttribute('href').substring(1);
+                        updateActiveSection(sectionId);
+                    });
+                });
+
+                // Create listing form
+                document.querySelector('.create-listing-form')?.addEventListener('submit', handleCreateListing);
+            }
+
+            function updateActiveSection(sectionId) {
+                // Update navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`[href="#${sectionId}"]`).classList.add('active');
+
+                // Update sections
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                document.getElementById(sectionId).classList.remove('hidden');
+            }
+
+            function showCreateListingModal() {
+                document.getElementById('createListingModal').classList.remove('hidden');
+            }
+
+            function hideCreateListingModal() {
+                document.getElementById('createListingModal').classList.add('hidden');
+            }
+
+            function handleCreateListing(e) {
+                e.preventDefault();
+                // Mock form submission
+                alert('Listing created successfully!');
+                hideCreateListingModal();
+                // In real app, would send to server and refresh listings
+            }
+
+            function editListing(id) {
+                alert(`Edit listing ${id}`);
+                // In real app, would open edit modal or navigate to edit page
+            }
+
+            function deleteListing(id) {
+                if (confirm('Are you sure you want to delete this listing?')) {
+                    alert(`Listing ${id} deleted`);
+                    // In real app, would send delete request and refresh listings
+                }
+            }
+
+            function replyToInquiry(id) {
+                const reply = prompt('Enter your reply:');
+                if (reply) {
+                    alert('Reply sent successfully!');
+                    // In real app, would send reply to server
+                }
+            }
+
+            function markAsRead(id) {
+                alert(`Marked inquiry ${id} as read`);
+                // In real app, would update status on server
+            }
+
+            return { init };
+        })();
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', dashboardApp.init);
+    </script>
+</body>
+</html>
