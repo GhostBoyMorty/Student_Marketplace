@@ -259,6 +259,12 @@ namespace Student_Marketplace.Controllers
             return View();
         }
 
+        // Browsing page for guests
+        public IActionResult Shopping()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
