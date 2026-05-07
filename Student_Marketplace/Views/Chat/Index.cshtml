@@ -1,0 +1,60 @@
+﻿@model Student_Marketplace.Models.ChatsM
+<link rel="stylesheet" href="~/css/chats.css" asp-append-version="true" />
+<!-- Link to your new CSS file -->
+<link rel="stylesheet" href="~/css/chat.css" />
+
+<div class="chat-container">
+    <div class="chat-header">
+
+        <strong>Chats </strong>
+    </div>
+
+    <div id="messagesList" class="chat-messages">
+        <!-- Seller Example -->
+        <div class="msg-bubble seller-msg">Hi! Are you interested in the item?</div>
+
+        <!-- User Example -->
+        <div class="msg-bubble user-msg">Yes! Is the price negotiable?</div>
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" id="messageInput" placeholder="Type your message here..." />
+        <button id="sendButton">Send</button>
+    </div>
+</div>
+
+<!-- Messages will appear here -->
+
+
+
+
+<!-- Include the SignalR Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+
+<script>
+    // Initialize connection
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    // What to do when a message is received from the server
+    connection.on("ReceiveMessage", function (user, message) {
+        const msg = document.createElement("div");
+        msg.innerHTML = `<strong>${user}:</strong> ${message}`;
+        document.getElementById("messagesList").appendChild(msg);
+    });
+
+    connection.start().catch(err => console.error(err.toString()));
+
+    // Sending message
+    document.getElementById("sendButton").addEventListener("click", function (event) {
+        const user = document.getElementById("userInput").value;
+        const message = document.getElementById("messageInput").value;
+
+        // Calls the C# method 'SendMessageToUser' in ChatHub.cs
+        connection.invoke("SendMessageToUser", user, "Seller", message)
+            .catch(err => console.error(err.toString()));
+
+        event.preventDefault();
+    });
+
