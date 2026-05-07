@@ -44,10 +44,75 @@
                     <h2 class="auth-form-heading">Authentication &amp; Onboarding</h2>
                     <p class="auth-form-desc">Choose whether you want to browse as a guest, log in to your account, or create a verified student seller profile.</p>
                 </div>
-                <div class="dev-nav">
-                    <a href="@Url.Action("Index", "Home")">Back to Landing</a>
-                    <a href="@Url.Action("SellerDashboard", "Home")">Seller Dashboard</a>
-                    <a href="@Url.Action("Marketplace", "Home")">Continue as Guest</a>
+            </div>
+
+            <div class="page-navigation">
+                <div class="nav-panel-header">
+                    <p class="nav-panel-copy">Quick access to core pages, seller tools, and upcoming features—so you can move through the marketplace faster.</p>
+                </div>
+                <div class="nav-section">
+                    <h4 class="nav-section-title">🏠 Core Pages</h4>
+                    <p class="nav-description">Navigate to the main user-facing pages for browsing, signing in, and marketplace access.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn" href="@Url.Action("Index", "Home")">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-label">Landing Page</span>
+                        </a>
+                        <a class="nav-page-btn nav-current" href="@Url.Action("Auth", "Home")">
+                            <span class="nav-icon">🔐</span>
+                            <span class="nav-label">Authentication</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("Marketplace", "Home")">
+                            <span class="nav-icon">🛒</span>
+                            <span class="nav-label">Marketplace</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h4 class="nav-section-title">👨‍💼 Seller Pages</h4>
+                    <p class="nav-description">Manage your business profile and seller dashboard with quick links.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+                            <span class="nav-icon">🏪</span>
+                            <span class="nav-label">Business Profile</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("SellerDashboard", "Home")">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Seller Dashboard</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <h4 class="nav-section-title">🔮 Future Pages</h4>
+                    <p class="nav-description">These upcoming features are planned for the next release of the marketplace.</p>
+                    <div class="nav-buttons-grid">
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Messages page - Coming Soon!')">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-label">Messages</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Orders page - Coming Soon!')">
+                            <span class="nav-icon">📦</span>
+                            <span class="nav-label">My Orders</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Wishlist page - Coming Soon!')">
+                            <span class="nav-icon">❤️</span>
+                            <span class="nav-label">Wishlist</span>
+                        </a>
+                        <a class="nav-page-btn" href="@Url.Action("Settings", "Home")">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-label">Account Settings</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Help page - Coming Soon!')">
+                            <span class="nav-icon">❓</span>
+                            <span class="nav-label">Help & Support</span>
+                        </a>
+                        <a class="nav-page-btn nav-future" href="#" onclick="alert('Admin page - Coming Soon!')">
+                            <span class="nav-icon">👑</span>
+                            <span class="nav-label">Admin Panel</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 

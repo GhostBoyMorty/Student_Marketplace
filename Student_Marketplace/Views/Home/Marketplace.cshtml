@@ -15,14 +15,81 @@
 </head>
 <body>
     <div class="market-dashboard">
-        <div class="page-back-nav">
-            <a href="@Url.Action("Index", "Home")" class="back-btn">← Back to Landing</a>
+        <div class="page-navigation">
+            <div class="nav-panel-header">
+                <p class="nav-panel-copy">Quick access to core pages, seller tools, and upcoming features—so you can move through the marketplace faster.</p>
+            </div>
+            <div class="nav-section">
+                <h4 class="nav-section-title">🏠 Core Pages</h4>
+                <p class="nav-description">Navigate to the main user-facing pages for browsing, signing in, and marketplace access.</p>
+                <div class="nav-buttons-grid">
+                    <a class="nav-page-btn" href="@Url.Action("Index", "Home")">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-label">Landing Page</span>
+                    </a>
+                    <a class="nav-page-btn" href="@Url.Action("Auth", "Home")">
+                        <span class="nav-icon">🔐</span>
+                        <span class="nav-label">Authentication</span>
+                    </a>
+                    <a class="nav-page-btn nav-current" href="@Url.Action("Marketplace", "Home")">
+                        <span class="nav-icon">🛒</span>
+                        <span class="nav-label">Marketplace</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h4 class="nav-section-title">👨‍💼 Seller Pages</h4>
+                <p class="nav-description">Manage your business profile and seller dashboard with quick links.</p>
+                <div class="nav-buttons-grid">
+                    <a class="nav-page-btn" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+                        <span class="nav-icon">🏪</span>
+                        <span class="nav-label">Business Profile</span>
+                    </a>
+                    <a class="nav-page-btn" href="@Url.Action("SellerDashboard", "Home")">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-label">Seller Dashboard</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <h4 class="nav-section-title">🔮 Future Pages</h4>
+                <p class="nav-description">These upcoming features are planned for the next release of the marketplace.</p>
+                <div class="nav-buttons-grid">
+                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Messages page - Coming Soon!')">
+                        <span class="nav-icon">💬</span>
+                        <span class="nav-label">Messages</span>
+                    </a>
+                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Orders page - Coming Soon!')">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-label">My Orders</span>
+                    </a>
+                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Wishlist page - Coming Soon!')">
+                        <span class="nav-icon">❤️</span>
+                        <span class="nav-label">Wishlist</span>
+                    </a>
+                    <a class="nav-page-btn" href="@Url.Action("Settings", "Home")">
+                        <span class="nav-icon">⚙️</span>
+                        <span class="nav-label">Account Settings</span>
+                    </a>
+                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Help page - Coming Soon!')">
+                        <span class="nav-icon">❓</span>
+                        <span class="nav-label">Help & Support</span>
+                    </a>
+                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Admin page - Coming Soon!')">
+                        <span class="nav-icon">👑</span>
+                        <span class="nav-label">Admin Panel</span>
+                    </a>
+                </div>
+            </div>
         </div>
         <header class="market-hero">
             <div class="hero-copy">
                 <p class="hero-tag">DUT Student Marketplace</p>
                 <h1>Welcome back, @userName</h1>
                 <p class="hero-description">Find verified student sellers, services, and campus deals across Durban and Midlands campuses.</p>
+                <p class="hero-note">Use the search bar to quickly find student sellers, products, and campus-specific deals.</p>
             </div>
             <div class="hero-actions">
                 <div class="search-bar">
@@ -147,7 +214,7 @@
                                     <button class="bookmark">♥</button>
                                 </div>
                                 <p class="listing-price">R220</p>
-                                <p class="listing-seller">by Thabo <span class="verified">✔</span></p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "thabo-seller" })" class="seller-link">Thabo</a> <span class="verified">✔</span></p>
                                 <p class="listing-trust">⭐ 4.8 (12 reviews)</p>
                             </div>
                         </article>
@@ -159,7 +226,7 @@
                                     <button class="bookmark">♥</button>
                                 </div>
                                 <p class="listing-price">R180</p>
-                                <p class="listing-seller">by Zinhle <span class="verified">✔</span></p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "zinhle-seller" })" class="seller-link">Zinhle</a> <span class="verified">✔</span></p>
                                 <p class="listing-trust">⭐ 4.9 (18 reviews)</p>
                             </div>
                         </article>
@@ -171,7 +238,7 @@
                                     <button class="bookmark">♥</button>
                                 </div>
                                 <p class="listing-price">R350</p>
-                                <p class="listing-seller">by Innocent <span class="verified">✔</span></p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "innocent-seller" })" class="seller-link">Innocent</a> <span class="verified">✔</span></p>
                                 <p class="listing-trust">⭐ 4.7 (24 reviews)</p>
                             </div>
                         </article>
@@ -183,8 +250,92 @@
                                     <button class="bookmark">♥</button>
                                 </div>
                                 <p class="listing-price">R130</p>
-                                <p class="listing-seller">by Siya <span class="verified">✔</span></p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "siya-seller" })" class="seller-link">Siya</a> <span class="verified">✔</span></p>
                                 <p class="listing-trust">⭐ 4.8 (20 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1505373377-b28d0ce3604d?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Student Laptop Stand</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R95</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "amara-seller" })" class="seller-link">Amara</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.6 (8 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1568640347023-a616a30a3331?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Essay Writing Assistance</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R250</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "dr-nkosi-seller" })" class="seller-link">Dr. Nkosi</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (42 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561188?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Vintage Clothing & Accessories</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R150</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "fatima-seller" })" class="seller-link">Fatima</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.7 (15 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69b13d835?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Photography Services</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R400</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "mthunzi-seller" })" class="seller-link">Mthunzi</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (31 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1564069114553-7215820c3a86?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Homemade Meal Prep</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R80</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "nomsa-seller" })" class="seller-link">Nomsa</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.9 (67 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1516628819585-d659410dbb3f?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Web Design & Development</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R600</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "lerato-seller" })" class="seller-link">Lerato</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.8 (19 reviews)</p>
+                            </div>
+                        </article>
+                        <article class="listing-card">
+                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80');"></div>
+                            <div class="listing-card-body">
+                                <div class="listing-title-row">
+                                    <h3>Chemistry Lab Notes</h3>
+                                    <button class="bookmark">♥</button>
+                                </div>
+                                <p class="listing-price">R45</p>
+                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "kabelo-seller" })" class="seller-link">Kabelo</a> <span class="verified">✔</span></p>
+                                <p class="listing-trust">⭐ 4.5 (5 reviews)</p>
                             </div>
                         </article>
                     </div>
