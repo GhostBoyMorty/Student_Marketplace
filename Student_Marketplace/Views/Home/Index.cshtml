@@ -13,151 +13,418 @@
 </head>
 <body>
 
-    <div class="auth-root">
+    <div class="auth-container" id="authContainer">
 
-        <!-- TOP LEFT LOGO -->
-        <div class="corner-logo corner-logo-left">Vendly.</div>
+        <!-- SIGN IN -->
+        <div class="form-container sign-in-container">
 
-        <!-- TOP RIGHT LOGO -->
-        <div class="corner-logo corner-logo-right">Vendly.</div>
+            <form asp-action="Login" asp-controller="Account" method="post">
 
-        <!-- LEFT SIDE — Signup -->
-        <div class="auth-illus auth-illus-left" id="illustLeft">
-            <div class="illus-content">
+                @Html.AntiForgeryToken()
 
-                <div class="illus-heading">
-                    <div class="illus-heading-outline">WELCOME</div>
-                    <div class="illus-heading-script">Back...</div>
+                <h1>Sign In</h1>
+
+                <p class="subtitle">
+                    Welcome back to Vendly
+                </p>
+
+                <div class="campus-tags">
+                    <span>DUT</span>
+                    <span>UKZN</span>
+                    <span>UCT</span>
+                    <span>UP</span>
                 </div>
 
-                <p class="illus-tagline">Your campus. Your marketplace.<br />Buy, sell and connect with students.</p>
+                <input type="email"
+                       name="email"
+                       placeholder="Email" />
 
-                <div class="illus-cards">
-                    <div class="illus-card">
-                        <div class="illus-card-icon">📚</div>
-                        <div class="illus-card-label">Textbooks</div>
-                    </div>
-                    <div class="illus-card">
-                        <div class="illus-card-icon">🎓</div>
-                        <div class="illus-card-label">Tutoring</div>
-                    </div>
-                    <div class="illus-card">
-                        <div class="illus-card-icon">💸</div>
-                        <div class="illus-card-label">Zero Fees</div>
-                    </div>
-                </div>
+                <input type="password"
+                       name="password"
+                       placeholder="Password" />
 
-                <img class="illus-img" src="~/images/login_vector.png" alt="" />
+                <a href="#" class="forgot">
+                    Forgot your password?
+                </a>
 
-            </div>
+                <button type="submit">
+                    SIGN IN
+                </button>
+
+                <p class="switch-text">
+                    Don’t have an account?
+                    <span id="showSignUp">
+                        Sign Up
+                    </span>
+                </p>
+
+            </form>
+
         </div>
 
-        <!-- RIGHT SIDE — Signin -->
-        <div class="auth-illus auth-illus-right" id="illustRight">
-            <div class="illus-content">
+        <!-- SIGN UP -->
+        <div class="form-container sign-up-container">
 
-                <div class="illus-heading">
-                    <div class="illus-heading-outline">WELCOME</div>
-                    <div class="illus-heading-script">Happy to see new faces...</div>
+            <form asp-action="Register" asp-controller="Account" method="post" enctype="multipart/form-data">
+
+                @Html.AntiForgeryToken()
+
+                <h1>Create Account</h1>
+
+                <p class="subtitle">
+                    Join your campus marketplace
+                </p>
+
+                <div class="campus-tags">
+                    <span>DUT</span>
+                    <span>UKZN</span>
+                    <span>UCT</span>
+                    <span>UP</span>
                 </div>
 
-                <p class="illus-tagline">Good to see you again.<br />Pick up right where you left off.</p>
+                <input type="text"
+                       name="fullName"
+                       placeholder="Full Name" />
 
-                <div class="illus-cards">
-                    <div class="illus-card">
-                        <div class="illus-card-icon">🛒</div>
-                        <div class="illus-card-label">Browse</div>
+                <input type="email"
+                       name="email"
+                       placeholder="School Email" />
+
+                <input type="password"
+                       name="password"
+                       placeholder="Password" />
+
+                <input type="number"
+                       name="studentNumber"
+                       placeholder="Student No." />
+
+                <div class="upload-preview-container">
+
+                    <!-- STUDENT CARD -->
+                    <div class="image-upload-box">
+
+                        <label for="studentCardInput" class="circle-upload">
+
+                            <img id="studentCardPreview"
+                                src="https://via.placeholder.com/120"
+                                alt="Preview" />
+
+                            <div class="upload-overlay">
+                                Upload Card
+                            </div>
+
+                        </label>
+
+                        <input type="file"
+                            id="studentCardInput"
+                            name="studentCardImage"
+                            accept="image/*"
+                            required />
+
+                        <p>Student Card</p>
+
                     </div>
-                    <div class="illus-card">
-                        <div class="illus-card-icon">📦</div>
-                        <div class="illus-card-label">My Listings</div>
+
+                    <!-- HOLDING CARD -->
+                    <div class="image-upload-box">
+
+                        <label for="holdingCardInput" class="circle-upload">
+
+                            <img id="holdingCardPreview"
+                                src="https://via.placeholder.com/120"
+                                alt="Preview" />
+
+                            <div class="upload-overlay">
+                                Upload Selfie
+                            </div>
+
+                        </label>
+
+                        <input type="file"
+                            id="holdingCardInput"
+                            name="studentHoldingCardImage"
+                            accept="image/*"
+                            required />
+
+                        <p>Holding Card</p>
+
                     </div>
-                    <div class="illus-card">
-                        <div class="illus-card-icon">💬</div>
-                        <div class="illus-card-label">Messages</div>
-                    </div>
+
                 </div>
 
-                <img class="illus-img" src="~/images/signup_vector.png" alt="" />
+                <button type="submit">
+                    SIGN UP
+                </button>
 
-            </div>
+                <p class="switch-text">
+                    Already have an account?
+                    <span id="showSignIn">
+                        Sign In
+                    </span>
+                </p>
+
+            </form>
+
         </div>
 
-        <div class="auth-card" id="authCard">
+        <!-- OVERLAY -->
+        <div class="overlay-container">
 
-            <!-- SIGNUP PANEL -->
-            <div class="auth-panel" id="signupPanel">
-                <div class="auth-card-title">Create Account</div>
-                <div class="auth-socials">
-                    <button class="auth-social-btn">G+</button>
-                    <button class="auth-social-btn">f</button>
-                    <button class="auth-social-btn">X</button>
-                    <button class="auth-social-btn">in</button>
-                </div>
-                <div class="auth-action-links">
-                    <a class="auth-action-btn" href="@Url.Action("Auth", "Home")">LOGIN / SIGN UP</a>
-                    <a class="auth-action-btn" href="@Url.Action("SellerDashboard", "Home")">GO TO SELLER DASHBOARD</a>
-                    <a class="auth-action-btn" href="@Url.Action("Marketplace", "Home")">CONTINUE AS GUEST</a>
+            <div class="overlay">
+
+                <!-- LEFT -->
+                <div class="overlay-panel overlay-left">
+
+                    <div class="brand">
+                        Vendly.
+                    </div>
+
+                    <div class="overlay-content">
+                        <h1>
+                            WELCOME
+                        </h1>
+
+                        <h2>
+                            Happy to see new faces...
+                        </h2>
+
+                        <p>
+                            Buy, sell and connect with students across your campus.
+                        </p>
+
+                        <div class="feature-cards">
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="42"
+                                     height="42"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M3 6h18"></path>
+                                    <path d="M8 6v12"></path>
+                                    <path d="M16 6v12"></path>
+                                    <path d="M3 18h18"></path>
+
+                                </svg>
+
+                                <span>Listings Near You</span>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="42"
+                                     height="42"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+
+                                </svg>
+
+                                <span>Message</span>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="42"
+                                     height="42"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M12 2v20"></path>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+
+                                </svg>
+
+                                <span>Save your fees</span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <img src="~/images/signUp.png" alt="Sign In" class="overlay-image" />
+
                 </div>
 
-                <form asp-action="Register" asp-controller="Account" method="post">
-                    @Html.AntiForgeryToken()
-                    <div class="auth-divider">or use your email for registration</div>
-                    <input class="auth-input" type="text" name="FullName" placeholder="Name" />
-                    <input class="auth-input" type="email" name="Email" placeholder="Email" />
-                    <input class="auth-input" type="password" name="Password" placeholder="Password" />
-                    <button type="submit" class="auth-submit">SIGN UP</button>
-                </form>
-                <button type="button" class="auth-switch" id="toSignin">Already have an account?</button>
+                <!-- RIGHT -->
+                <div class="overlay-panel overlay-right">
+
+                    <div class="brand">
+                        Vendly.
+                    </div>
+
+                    <div class="overlay-content">
+                        <h1>
+                            WELCOME
+                        </h1>
+
+                        <h2>
+                            Good to see you again...
+                        </h2>
+
+                        <p>
+                            Your campus marketplace for textbooks, electronics and student deals from one of your own...
+                        </p>
+
+                        <div class="feature-cards">
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="42"
+                                     height="42"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 0 4 24V4.5A2.5 2.5 0 0 1 6.5 2z"></path>
+
+                                </svg>
+
+                                <span>Buy Textbooks</span>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="42"
+                                    height="42"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+
+                                    <!-- Screen -->
+                                    <rect x="4" y="4" width="16" height="12" rx="1" ry="1" />
+                                    
+                                    <!-- Base (keyboard area) -->
+                                    <rect x="3" y="16" width="18" height="2" rx="0.3" />
+                                    
+                                    <!-- Bottom stand/base -->
+                                    <path d="M5 18H19" />
+                                    
+                                    <!-- Optional: subtle keyboard lines -->
+                                    <path d="M7 15H17" stroke-width="1" opacity="0.6" />
+                                    <path d="M8 13.5H16" stroke-width="1" opacity="0.5" />
+                                </svg>
+
+                                <span>Buy Tech</span>
+
+                            </div>
+
+                            <div class="feature-card">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="42"
+                                     height="42"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+
+                                    <path d="M20 12V8H4v4"></path>
+                                    <path d="M2 12h20v8H2z"></path>
+
+                                </svg>
+
+                                <span>Campus Deals</span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <img src="~/images/login.png" alt="Sign Up" class="overlay-image" />
+
+                </div>
+
             </div>
-
-            <!-- SIGNIN PANEL -->
-            <div class="auth-panel hidden" id="signinPanel">
-                <div class="auth-card-title">Sign In</div>
-                <div class="auth-socials">
-                    <button class="auth-social-btn">G+</button>
-                    <button class="auth-social-btn">f</button>
-                    <button class="auth-social-btn">X</button>
-                    <button class="auth-social-btn">in</button>
-                </div>
-                <form asp-action="Login" asp-controller="Account" method="post">
-                    @Html.AntiForgeryToken()
-                    <div class="auth-divider">or use your email password</div>
-                    <input class="auth-input" type="email" name="Email" placeholder="Email" />
-                    <input class="auth-input" type="password" name="Password" placeholder="Password" />
-                    <a class="auth-forgot">Forgot Your Password?</a>
-                    <button type="submit" class="auth-submit">SIGN IN</button>
-                </form>
-                <button type="button" class="auth-switch" id="toSignup">Don't have an account?</button>
-            </div>
-
-            <!-- Browse as Guest link -->
-            <a href="/Home/Shopping" class="auth-switch" style="margin-top:18px; text-decoration: underline;">Browse as Guest</a>
 
         </div>
 
     </div>
 
+    <!-- SCRIIPT. . .-->
     <script>
-        var card = document.getElementById('authCard');
-        var signupPanel = document.getElementById('signupPanel');
-        var signinPanel = document.getElementById('signinPanel');
 
-        document.getElementById('toSignin').addEventListener('click', function () {
-            card.classList.add('slide-right');
-            setTimeout(function () {
-                signupPanel.classList.add('hidden');
-                signinPanel.classList.remove('hidden');
-            }, 250);
+        const authContainer =
+            document.getElementById("authContainer");
+
+        const showSignUp =
+            document.getElementById("showSignUp");
+
+        const showSignIn =
+            document.getElementById("showSignIn");
+
+        showSignUp.addEventListener("click", () => {
+
+            authContainer.classList.add("active");
+
         });
 
-        document.getElementById('toSignup').addEventListener('click', function () {
-            card.classList.remove('slide-right');
-            setTimeout(function () {
-                signinPanel.classList.add('hidden');
-                signupPanel.classList.remove('hidden');
-            }, 250);
+        /* IMAGE PREVIEW */
+
+        function setupImagePreview(inputId, previewId) {
+
+            const input =
+                document.getElementById(inputId);
+
+            const preview =
+                document.getElementById(previewId);
+
+            input.addEventListener("change", function () {
+
+                const file = this.files[0];
+
+                if (file) {
+
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+
+                        preview.src = e.target.result;
+
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        setupImagePreview(
+            "studentCardInput",
+            "studentCardPreview"
+        );
+
+        setupImagePreview(
+            "holdingCardInput",
+            "holdingCardPreview"
+        );
+
+        showSignIn.addEventListener("click", () => {
+
+            authContainer.classList.remove("active");
+
         });
+
     </script>
 
 </body>

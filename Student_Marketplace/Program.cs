@@ -1,8 +1,10 @@
 using Student_Marketplace.Hubs;
+using Student_Marketplace.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Student_Marketplace
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -13,6 +15,9 @@ namespace Student_Marketplace
 
             builder.Services.AddSignalR();
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,0 +1,193 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/*HEADER. . .*/
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #4338ca, #6366f1);
+    color: white;
+    box-shadow: var(--shadow-lg);
+}
+
+.profile-header h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.profile-header p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+/* PROFILE CONTENT. . .*/
+.profile-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+}
+
+/* AVATAR. . .*/
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 3px solid rgba(67, 56, 202, 0.2);
+}
+
+/* PROFILE INFO. . .*/
+.profile-info h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    margin: 0;
+    color: var(--text);
+}
+
+.profile-info p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* PROFILE STATS. . .*/
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+/* STAT CARDS. . .*/
+.profile-stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    transition: 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-stat:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.profile-stat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+}
+
+/* STAT TXT. . .*/
+.profile-stat h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    margin: 0;
+    color: var(--primary);
+}
+
+.profile-stat p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* PROFILE FORM. . .*/
+.profile-form {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+}
+
+/* FORM GRID. . .*/
+.profile-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+/* INPUT. . . */
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.15);
+}
+
+/* ACTION BTN. . .*/
+.profile-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.profile-actions .btn-primary {
+    background: var(--primary);
+}
+
+.profile-actions .btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+/*BUSSINESS INFO. . .*/
+.profile-business {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* RESPONSIVE DSGN. . .*/
+@media (max-width: 768px) {
+
+    .profile-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-business {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

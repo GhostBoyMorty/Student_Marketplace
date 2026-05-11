@@ -1,0 +1,263 @@
+.orders-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/*HEADER. . .*/
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.orders-header h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    margin: 0;
+    color: var(--text);
+}
+
+.orders-header p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* HEADER ACTIONS. . .*/
+.orders-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.orders-actions .btn-primary,
+.orders-actions .btn-secondary {
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+/* FILTER / SEARCH BAR (whatever you wanna call it). . .*/
+.orders-toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.orders-search {
+    flex: 1;
+    min-width: 220px;
+}
+
+.orders-search input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.orders-filter {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    font-size: 13px;
+}
+
+/*ORDERS TABLE WRAPPER. . .*/
+.orders-table-wrapper {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/*TABLE STYLING. . .*/
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table thead {
+    background: #f8fafc;
+}
+
+.orders-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+    border-bottom: 1px solid var(--border);
+}
+
+.orders-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+.orders-table tr:hover {
+    background: #f9fafb;
+}
+
+/*ORDER INFO CELL. . .*/
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.order-info strong {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.order-id {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/*STATUS BAGDES CF. . .*/
+.order-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: rgba(245,158,11,0.12);
+    color: #f59e0b;
+}
+
+.status-processing {
+    background: rgba(67,56,202,0.12);
+    color: var(--primary);
+}
+
+.status-shipped {
+    background: rgba(59,130,246,0.12);
+    color: #3b82f6;
+}
+
+.status-delivered {
+    background: rgba(16,185,129,0.12);
+    color: #10b981;
+}
+
+.status-cancelled {
+    background: rgba(239,68,68,0.12);
+    color: #ef4444;
+}
+
+/*PRICE COLUMN. . .*/
+.order-price {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* ACTION BUTTONS */
+.order-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-view,
+.btn-cancel {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-view {
+    background: rgba(67,56,202,0.1);
+    color: var(--primary);
+}
+
+.btn-view:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-cancel {
+    background: rgba(239,68,68,0.1);
+    color: var(--error);
+}
+
+.btn-cancel:hover {
+    background: var(--error);
+    color: white;
+}
+
+/* ORDER SUMMARY CRDS. . .*/
+.orders-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.order-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: 0.2s ease;
+}
+
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.order-card h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    margin: 0;
+    color: var(--primary);
+}
+
+.order-card p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* RESPONSIVE DESIGN. . .*/
+@media (max-width: 768px) {
+
+    .orders-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .orders-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .orders-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .orders-table {
+        min-width: 700px;
+    }
+
+    .orders-summary {
+        grid-template-columns: 1fr;
+    }
+}

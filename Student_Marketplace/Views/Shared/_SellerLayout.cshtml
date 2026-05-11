@@ -1,0 +1,122 @@
+@{
+    ViewBag.Title = "Seller Dashboard - Vendly";
+    var seller = ViewBag.SellerData;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+    <link href="~/css/SellerDashboard.css" rel="stylesheet" />
+    <link href="~/css/DashboardPartials/sellerlayout.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+            <h2>Vendly</h2>
+            <span>Seller Space</span>
+        </div>
+
+        <div class="sidebar-profile">
+
+            <img src="@seller.AvatarUrl"
+                 alt="@seller.BusinessName"
+                 class="profile-avatar" />
+
+            <div class="profile-info">
+
+                <h3>@seller.BusinessName</h3>
+
+                <div class="rating">
+                    <svg class="mini-star" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l3 7 7 .6-5.2 4.6 1.6 6.8L12 17.8 5.6 21l1.6-6.8L2 9.6 9 9z"/>
+                    </svg>
+
+                    <span>@seller.Rating</span>
+                    <span class="rating-divider">•</span>
+                    <span>@seller.TotalReviews reviews</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- NAV -->
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-link active" onclick="loadPartial(event,'Overview')">Dashboard</a>
+            <a href="#" class="nav-link" onclick="loadPartial(event,'Listings')">Listings</a>
+            <a href="#" class="nav-link" onclick="loadPartial(event,'Orders')">Orders</a>
+            <a href="#" class="nav-link" onclick="loadPartial(event,'Analytics')">Analytics</a>
+            <a href="#" class="nav-link" onclick="loadPartial(event,'Settings')">Settings</a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <a asp-action="Index" asp-controller="Home" class="logout-btn">
+                Back To Marketplace
+            </a>
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dashboard-main">
+
+        <header class="dashboard-topbar">
+
+            <div class="topbar-left">
+                <h1>MarketSpace</h1>
+                <p>Manage your business</p>
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="top-btn">
+                    Notifications (@seller.NotificationsCount)
+                </button>
+
+                <button class="top-btn">
+                    Exports (@seller.ExportRequests)
+                </button>
+
+            </div>
+
+        </header>
+         @RenderBody()
+        
+
+    </main>
+
+</div>
+
+<script>
+
+async function loadPartial(event, partialName) {
+
+    const response = await fetch(`/Home/LoadPartial?partial=${partialName}`);
+    const html = await response.text();
+
+    document.querySelector('.dashboard-content').innerHTML = html;
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+
+    event.currentTarget.classList.add('active');
+}
+
+</script>
+
+</body>
+</html>

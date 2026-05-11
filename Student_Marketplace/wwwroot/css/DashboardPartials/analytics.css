@@ -1,0 +1,312 @@
+.analytics-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.analytics-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.analytics-header h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    margin: 0;
+    color: var(--text);
+}
+
+.analytics-header p {
+    margin: 6px 0 0;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ENHANCED METRICS GRID */
+.analytics-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.analytics-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.analytics-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.analytics-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.analytics-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.analytics-icon {
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    background: rgba(67, 56, 202, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.analytics-card h3 {
+    font-family: 'Sora', sans-serif;
+    margin: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.analytics-value {
+    font-family: 'Sora', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.analytics-change {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.analytics-change.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.analytics-change.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.analytics-label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* CHAT SECTION...*/
+.analytics-charts {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+}
+
+/* CHART CONTAINER. . .*/
+.chart-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    min-height: 220px;
+}
+
+.chart-card h3 {
+    font-family: 'Sora', sans-serif;
+    margin: 0 0 16px;
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* SIMPLE BAR CHART */
+.simple-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 130px;
+    gap: 6px;
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.bar {
+    width: 100%;
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+    min-height: 10px;
+}
+
+.bar:hover {
+    opacity: 0.8;
+    transform: scaleY(1.05);
+}
+
+.bar-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* PERFORMANCE / BREAKDOWN SECTION. . .*/
+.analytics-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.breakdown-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.breakdown-card h3 {
+    font-family: 'Sora', sans-serif;
+    margin: 0 0 16px;
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+/*Progress / performance bars. . .*/
+.progress-item {
+    margin-bottom: 16px;
+}
+
+.progress-item:last-child {
+    margin-bottom: 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #eef2f7;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+
+/* SMALL INSIGHT CARDS (optional widgets). . .*/
+.analytics-insights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.insight-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    transition: all 0.2s ease;
+}
+
+.insight-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.insight-card-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 6px;
+    color: var(--primary);
+}
+
+.insight-card h4 {
+    margin: 0;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.insight-card p {
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* RESPONSIVE DESIGN. . .*/
+@media (max-width: 1024px) {
+
+    .analytics-charts {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-breakdown {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .analytics-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .analytics-breakdown {
+        grid-template-columns: 1fr;
+    }
+
+    .simple-chart {
+        height: 150px;
+    }
+}
