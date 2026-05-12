@@ -30,6 +30,96 @@ namespace Student_Marketplace.Controllers
             return View();
         }
 
+        // PARTIAL LOADER. . .
+        public IActionResult LoadPartial(string partial)
+        {
+            // Set common seller data for all partials
+            ViewBag.SellerData = new {
+                SellerId = "12345678",
+                BusinessName = "Campus Eats Delivery",
+                AvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                Rating = 4.9,
+                TotalReviews = 67,
+                TotalSales = 234,
+                ActiveListings = 6,
+                PendingInquiries = 12,
+                CompletedSales = 45,
+                UnreadMessages = 3,
+                RecentEarnings = 1250.00,
+                ProfileViews = 1824,
+                ConversionRate = "7.2%",
+                AverageRating = "4.9",
+                ResponseTime = "< 4 hours",
+                DeliveryRadius = "5 km",
+                CampusCoverage = "Durban Campuses",
+                NotificationChannel = "Email",
+                NewOrders = 1,
+                DraftShipments = 0,
+                ConfirmedShipments = 1,
+                ShippedShipments = 6,
+                NotificationsCount = 2,
+                ExportRequests = 4
+            };
+
+            // Set partial-specific data
+            ViewBag.Listings = new[] {
+                new { Id = 1, Title = "Chicken Wrap Meal", Price = 45, Status = "Active", Views = 23, Inquiries = 5 },
+                new { Id = 2, Title = "Veggie Bowl Special", Price = 38, Status = "Active", Views = 31, Inquiries = 8 },
+                new { Id = 3, Title = "Breakfast Sandwich", Price = 32, Status = "Active", Views = 18, Inquiries = 3 },
+                new { Id = 4, Title = "Healthy Salad Box", Price = 42, Status = "Active", Views = 12, Inquiries = 2 },
+                new { Id = 5, Title = "Custom Meal Prep Service", Price = 280, Status = "Active", Views = 8, Inquiries = 1 },
+                new { Id = 6, Title = "Catering for Events", Price = 450, Status = "Active", Views = 15, Inquiries = 4 }
+            };
+
+            ViewBag.Orders = new[] {
+                new { Id = 1, CustomerName = "John Doe", Amount = 150, Status = "Delivered", Date = "2024-05-08" },
+                new { Id = 2, CustomerName = "Jane Smith", Amount = 95, Status = "Processing", Date = "2024-05-10" },
+                new { Id = 3, CustomerName = "Mike Johnson", Amount = 210, Status = "Pending", Date = "2024-05-11" }
+            };
+
+            ViewBag.Analytics = new {
+                TotalViews = 1824,
+                TotalClicks = 156,
+                TotalSales = 234,
+                Revenue = 29475.00,
+                ConversionRate = 7.2,
+                AverageOrderValue = 125.50,
+                TopProduct = "Chicken Wrap Meal",
+                BestDay = "Friday",
+                PeakHour = "12:00 - 14:00"
+            };
+
+            ViewBag.Profile = new {
+                BusinessName = "Campus Eats Delivery",
+                AvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                Email = "campuseats@vendly.co.za",
+                Phone = "+27 61 234 5678",
+                Campus = "Durban Campuses",
+                Address = "DUT North Campus, Durban",
+                DeliveryRadius = "5 km",
+                Bio = "Delivering fresh, affordable meals to students across DUT campuses.",
+                IsVerified = true,
+                Rating = 4.9
+            };
+
+            ViewBag.Settings = new {
+                BusinessName = "Campus Eats Delivery",
+                AvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                Email = "campuseats@vendly.co.za",
+                Phone = "+27 61 234 5678",
+                Campus = "Durban Campuses",
+                Address = "DUT North Campus, Durban",
+                DeliveryRadius = "5 km",
+                NotificationEmail = true,
+                NotificationSms = false,
+                PayoutMethod = "Bank Transfer",
+                BankName = "First National Bank",
+                AccountNumber = "1234567890"
+            };
+
+            return PartialView($"~/Views/Home/SellerPartials/_{partial}.cshtml");
+        }
+
         public IActionResult Profile(string sellerId)
         {
             // Mock seller data - in real app this would come from database
@@ -219,8 +309,12 @@ namespace Student_Marketplace.Controllers
 
         public IActionResult Settings()
         {
-            ViewBag.SettingsData = new {
+            ViewBag.SettingsData = new
+            {
                 BusinessName = "Campus Eats Delivery",
+
+                AvatarUrl = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+
                 Email = "campuseats@vendly.co.za",
                 Phone = "+27 61 234 5678",
                 Campus = "Durban Campuses",

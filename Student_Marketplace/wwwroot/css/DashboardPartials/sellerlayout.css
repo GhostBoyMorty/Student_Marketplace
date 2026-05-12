@@ -1,0 +1,212 @@
+/* THY ROOT. . .*/
+:root {
+    --primary: #4338ca;
+    --primary-dark: #312e81;
+    --accent: #6366f1;
+
+    --text: #0f172a;
+    --text-muted: #475569;
+
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --border: #e2e8f0;
+
+    --shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+/* DASHBOARD LAYOUT. . .*/
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+/* SIDEBAR. . .*/
+
+.dashboard-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: #111827; /* keep your dark theme */
+    min-height: 100vh;
+}
+
+/* BRAND AREA. . .*/
+.sidebar-brand {
+    padding: 22px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.sidebar-brand h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    margin: 0;
+    color: white;
+}
+
+.sidebar-brand span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* PROFILE SCTN. . .*/
+.sidebar-profile {
+    display: flex;
+    gap: 12px;
+    padding: 18px 22px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/*AVATAR. . .*/
+.profile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.15);
+}
+
+/*PROFILE TEXT. . .*/
+.profile-info h3 {
+    font-size: 15px;
+    margin: 0;
+    color: white;
+}
+
+.profile-info .rating {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+}
+
+/*NAV. . .*/
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 14px;
+    gap: 6px;
+}
+
+/* NAV LINKS. . .*/
+.nav-link {
+    padding: 12px 14px;
+    border-radius: 12px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* HOVER + ACTIVE. . .*/
+.nav-link:hover {
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+/* SIDEBAR FOOTER. . .*/
+.sidebar-footer {
+    margin-top: auto;
+    padding: 18px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* LOGOUT BUTTON. . .*/
+.logout-btn {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(239,68,68,0.15);
+    color: #ef4444;
+}
+
+/*MAIN CONTENT AREA. . .*/
+.dashboard-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-x: hidden;
+}
+
+/* TOPBAR. . .*/
+.dashboard-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+/* TOPBAR TXT. . .*/
+.topbar-left h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    margin: 0;
+}
+
+.topbar-left p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 4px 0 0;
+}
+
+/* TOP BTNS. . .*/
+.topbar-right {
+    display: flex;
+    gap: 10px;
+}
+
+.top-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #f8fafc;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.top-btn:hover {
+    background: white;
+    border-color: var(--primary);
+}
+
+/* CONTENT AREA (IMP.). . .*/
+.dashboard-content {
+    padding: 24px;
+    flex: 1;
+}
+
+/* RESPONSIVE DSGN. . .*/
+@media (max-width: 768px) {
+
+    .dashboard-layout {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        width: 100%;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+}

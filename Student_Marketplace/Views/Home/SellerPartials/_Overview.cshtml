@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="~/css/DashboardPartials/overview.css" />
+
+@{
+    var seller = ViewBag.SellerData;
+    var currentHour = DateTime.Now.Hour;
+    var greeting = currentHour < 12 ? "Good Morning" : currentHour < 18 ? "Good Afternoon" : "Good Evening";
+    var dayName = DateTime.Now.ToString("dddd");
+}
+
+<!-- WELCOME CARD -->
+<div class="welcome-card">
+    <div class="welcome-decorations">
+        <span class="decoration">📦</span>
+        <span class="decoration">💼</span>
+        <span class="decoration">📊</span>
+        <span class="decoration">✨</span>
+    </div>
+    
+    <div class="welcome-content">
+        <h2>@greeting, @seller.BusinessName! 👋</h2>
+        <p>Have a great @dayName - Keep crushing those sales goals!</p>
+    </div>
+
+    <div class="welcome-icon">🎉</div>
+</div>
+
+<!-- DASHBOARD HEADER -->
+<div class="page-header">
+
+    <div>
+        <h1>Dashboard Overview</h1>
+        <p>Here's your business snapshot</p>
+    </div>
+
+</div>
+
+<!-- KEY METRICS -->
+<div class="metrics-grid">
+
+    <div class="metric-card">
+        <h3>@seller.TotalSales</h3>
+        <p>Total Sales</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>@seller.ActiveListings</h3>
+        <p>Active Listings</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>@seller.PendingInquiries</h3>
+        <p>Pending Inquiries</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>@seller.UnreadMessages</h3>
+        <p>New Messages</p>
+    </div>
+
+</div>

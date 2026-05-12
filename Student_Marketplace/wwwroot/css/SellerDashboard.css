@@ -32,6 +32,8 @@ body {
     background: var(--bg-light);
     overflow-x: hidden;
     overflow-y: auto;
+    display: block;
+    min-height: 100vh;
 }
 
 .dashboard-page {
@@ -41,11 +43,37 @@ body {
 
 /* Sidebar */
 .dashboard-sidebar {
-    width: 280px;
-    background: #111827;
-    border-right: 1px solid rgba(255,255,255,0.08);
+    width: 250px;
+    background: #0f172a;
+    border-right: 1px solid rgba(255,255,255,0.05);
     display: flex;
     flex-direction: column;
+    color: white;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.quick-btn {
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: none;
+    background: white;
+    border: 1px solid #e2e8f0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.quick-btn:hover {
+    background: #4338ca;
     color: white;
 }
 
@@ -101,6 +129,26 @@ body {
     gap: 4px;
 }
 
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    margin-top: 4px;
+}
+
+.mini-star {
+    width: 14px;
+    height: 14px;
+    color: #f59e0b;
+    flex-shrink: 0;
+}
+
+.rating-divider {
+    opacity: 0.5;
+}
+
 .sidebar-nav {
     flex: 1;
     padding: 16px 0;
@@ -109,23 +157,25 @@ body {
 .nav-link {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 22px;
-    color: rgba(255,255,255,0.82);
+    gap: 14px;
+    padding: 14px 18px;
+    margin: 4px 12px;
+    border-radius: 14px;
+    color: rgba(255,255,255,0.72);
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.2s ease;
-    position: relative;
+    transition: 0.2s ease;
 }
 
 .nav-link:hover {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.06);
     color: white;
 }
 
 .nav-link.active {
-    background: rgba(67, 56, 202, 0.95);
+    background: linear-gradient(135deg,#4f46e5,#4338ca);
     color: white;
+    box-shadow: 0 8px 18px rgba(79,70,229,.25);
 }
 
 .nav-link.active:hover {
@@ -133,7 +183,26 @@ body {
 }
 
 .nav-icon {
-    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+.metric-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    flex-shrink: 0;
+    color: var(--primary);
+}
+
+.activity-icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    flex-shrink: 0;
+    color: var(--primary);
 }
 
 .notification-badge {
@@ -173,8 +242,9 @@ body {
 /* Main Content */
 .dashboard-main {
     flex: 1;
-    padding: 32px;
-    max-width: calc(100vw - 280px);
+    padding: 22px;
+    background: #f5f7fb;
+    min-height: 100vh;
 }
 
 .dashboard-header {
@@ -248,14 +318,13 @@ body {
 
 .top-navigation {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 18px 24px;
-    margin-bottom: 24px;
-    border-radius: 18px;
+    align-items: center;
     background: white;
-    box-shadow: var(--shadow);
+    border-radius: 22px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    border: 1px solid #edf1f7;
 }
 
 .top-navigation-title .page-title {
@@ -307,14 +376,11 @@ body {
 }
 
 .banner-card {
-    background: white;
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 170px;
+    border-radius: 24px;
+    padding: 28px;
+    background: linear-gradient(135deg,#ffffff,#f8faff);
+    border: 1px solid #e9eef7;
+    min-height: 180px;
 }
 
 .banner-card h3 {
@@ -329,8 +395,14 @@ body {
     line-height: 1.5;
 }
 
+.banner-highlight h3,
+.banner-highlight p {
+    color: white;
+}
+
 .banner-highlight {
-    border: 1px solid rgba(67, 56, 202, 0.16);
+    background: linear-gradient(135deg,#4338ca,#6366f1);
+    color: white;
 }
 
 .banner-secondary {
@@ -422,26 +494,44 @@ body {
     margin-bottom: 48px;
 }
 
+.metric-trend {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+.metric-trend.positive {
+    background: rgba(16,185,129,.12);
+    color: #10b981;
+}
+
 .metric-card {
-    background: var(--bg-card);
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 16px;
+    background: white;
+    border-radius: 22px;
+    padding: 22px;
+    border: 1px solid #edf1f7;
+    transition: 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(15,23,42,.08);
 }
 
 .metric-icon {
-    font-size: 32px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(67, 56, 202, 0.1);
-    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    padding: 12px;
+    background: rgba(79,70,229,.08);
+    border-radius: 16px;
+    color: #4338ca;
+    stroke-width: 2;
 }
 
 .metric-content {
@@ -500,6 +590,8 @@ body {
     background: rgba(67, 56, 202, 0.1);
     border-radius: 8px;
     flex-shrink: 0;
+    stroke: var(--primary);
+    stroke-width: 2;
 }
 
 .activity-content p {
@@ -515,11 +607,10 @@ body {
 
 /* Listings Table */
 .listings-table {
-    background: var(--bg-card);
-    border-radius: 12px;
-    border: 1px solid var(--border);
+    background: white;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: var(--shadow);
+    border: 1px solid #edf1f7;
 }
 
 .listings-table table {
@@ -528,7 +619,7 @@ body {
 }
 
 .listings-table thead {
-    background: var(--bg-light);
+    background: #f8fafc;
 }
 
 .listings-table th,
@@ -539,9 +630,10 @@ body {
 }
 
 .listings-table th {
-    font-weight: 600;
-    color: var(--text);
-    font-size: 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #64748b;
 }
 
 .listings-table td {

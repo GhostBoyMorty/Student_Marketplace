@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="~/css/DashboardPartials/listings.css" />
+
+
+@{
+    var listings = ViewBag.Listings;
+}
+
+<div class="page-header">
+
+    <div>
+        <h1>Listings</h1>
+        <p>Manage your products</p>
+    </div>
+
+</div>
+
+<div class="listings-table-wrapper">
+
+    <table class="listings-table">
+
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (listings != null)
+            {
+                @foreach (var listing in listings)
+                {
+                    <tr>
+                        <td>@listing.Title</td>
+                        <td>R@listing.Price</td>
+                        <td><span class="status-badge status-active">@listing.Status</span></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 20px; color: #999;">No listings found</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

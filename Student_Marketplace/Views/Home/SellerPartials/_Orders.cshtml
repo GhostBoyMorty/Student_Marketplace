@@ -1,0 +1,121 @@
+<link rel="stylesheet" href="~/css/DashboardPartials/orders.css" />
+
+@{
+    var orders = ViewBag.Orders;
+}
+
+<div class="page-header">
+
+    <div>
+        <h1>Orders</h1>
+        <p>Track and manage customer purchases</p>
+    </div>
+
+    <div class="header-actions">
+        <button class="btn-primary">Export</button>
+    </div>
+
+</div>
+
+<!-- ORDER SUMMARY CARDS -->
+<div class="metrics-grid">
+
+    <div class="metric-card">
+        <h3>@(orders?.Length ?? 0)</h3>
+        <p>Total Orders</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>3</h3>
+        <p>Pending</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>12</h3>
+        <p>Completed</p>
+    </div>
+
+    <div class="metric-card">
+        <h3>2</h3>
+        <p>Cancelled</p>
+    </div>
+
+</div>
+
+<!-- FILTER BAR -->
+<div class="orders-toolbar">
+
+    <div class="orders-search">
+        <input type="text" placeholder="Search order ID or customer..." />
+    </div>
+
+    <select class="orders-filter">
+        <option>All Status</option>
+        <option>Pending</option>
+        <option>Processing</option>
+        <option>Completed</option>
+        <option>Cancelled</option>
+    </select>
+
+    <select class="orders-filter">
+        <option>Newest First</option>
+        <option>Oldest First</option>
+    </select>
+
+</div>
+
+<!-- ORDERS TABLE -->
+<div class="orders-table-wrapper">
+
+    <table class="orders-table">
+
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (orders != null)
+            {
+                @foreach (var order in orders)
+                {
+                    <tr>
+
+                        <td>#@order.Id</td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.Date</td>
+                        <td class="order-price">R@order.Amount</td>
+
+                        <td>
+                            <span class="order-status status-@order.Status.ToLower()">
+                                @order.Status
+                            </span>
+                        </td>
+
+                        <td class="order-actions">
+                            <button class="btn-view">View</button>
+                            <button class="btn-cancel">Cancel</button>
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 20px; color: #999;">No orders found</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

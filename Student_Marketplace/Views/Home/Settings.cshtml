@@ -3,120 +3,331 @@
     ViewData["Title"] = "Seller Settings";
     var settings = ViewBag.SettingsData;
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
     <link href="~/css/LandingPage.css" rel="stylesheet" />
-    <link href="~/css/SellerDashboard.css" rel="stylesheet" />
+    <link href="~/css/Settings.css" rel="stylesheet" />
 </head>
+
 <body>
-    <div class="dashboard-page">
-        <aside class="dashboard-sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-profile" style="padding: 24px; gap: 12px;">
-                    <div class="profile-avatar" style="width: 56px; height: 56px; background: rgba(67,56,202,0.1); display:flex; align-items:center; justify-content:center; border-radius:16px; font-size:24px; color: var(--primary);">⚙️</div>
+
+    <div class="settings-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="settings-sidebar">
+
+            <div class="settings-sidebar-top">
+
+                <div class="settings-brand">
+                    <div class="brand-logo">V</div>
+
                     <div>
-                        <h3 style="margin:0;">Store Settings</h3>
-                        <p style="margin:4px 0 0; font-size:14px; color: var(--text-muted);">Update business preferences and payout info.</p>
+                        <h2>Vendly</h2>
+                        <span>Seller Settings</span>
                     </div>
                 </div>
+
+                <div class="settings-store-card">
+
+                    <img src="@settings.AvatarUrl"
+                         alt="@settings.BusinessName"
+                         class="store-avatar" />
+
+                    <div class="store-info">
+                        <h3>@settings.BusinessName</h3>
+                        <p>@settings.Campus</p>
+                    </div>
+
+                </div>
+
             </div>
-            <nav class="sidebar-nav" style="padding:0 0 16px;">
-                <a class="nav-link" href="@Url.Action("SellerDashboard", "Home")">Dashboard</a>
-                <a class="nav-link" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">Business Profile</a>
-                <a class="nav-link active" href="@Url.Action("Settings", "Home")">Settings</a>
+
+            <nav class="settings-nav">
+
+                <a class="settings-link"
+                   href="@Url.Action("SellerDashboard", "Home")">
+
+                    <span>📊</span>
+                    Dashboard
+
+                </a>
+
+                <a class="settings-link"
+                   href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+
+                    <span>🏪</span>
+                    Business Profile
+
+                </a>
+
+                <a class="settings-link active"
+                   href="@Url.Action("Settings", "Home")">
+
+                    <span>⚙️</span>
+                    Settings
+
+                </a>
+
             </nav>
+
+            <div class="sidebar-footer">
+
+                <a href="@Url.Action("Index", "Home")"
+                   class="back-marketplace">
+
+                    ← Back to Marketplace
+
+                </a>
+
+            </div>
+
         </aside>
 
-        <main class="dashboard-main">
-            <div class="dashboard-header">
+        <!-- MAIN -->
+        <main class="settings-main">
+
+            <!-- TOP HEADER -->
+            <div class="settings-header">
+
                 <div>
-                    <h1>Account & store settings</h1>
-                    <p>Manage your business profile, payment preferences, and notification delivery.</p>
+                    <span class="settings-label">STORE SETTINGS</span>
+
+                    <h1>Account & Store Settings</h1>
+
+                    <p>
+                        Manage your business profile, payouts,
+                        delivery preferences and notifications.
+                    </p>
                 </div>
-                <div>
-                    <a class="btn-primary" href="@Url.Action("SellerDashboard", "Home")">Back to dashboard</a>
+
+                <div class="settings-header-actions">
+
+                    <a class="secondary-btn"
+                       href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
+
+                        View Store
+
+                    </a>
+
+                    <a class="primary-btn"
+                       href="@Url.Action("SellerDashboard", "Home")">
+
+                        Dashboard
+
+                    </a>
+
                 </div>
+
             </div>
 
             @if (TempData["SettingsSaved"] != null)
             {
-                <div class="alert success">@TempData["SettingsSaved"]</div>
+                <div class="settings-alert success">
+                    @TempData["SettingsSaved"]
+                </div>
             }
 
-            <form method="post" asp-action="SaveSettings" asp-controller="Home" class="settings-form">
-                <section class="settings-section">
-                    <h2>Business details</h2>
-                    <div class="form-grid">
-                        <label>
-                            Business name
-                            <input type="text" name="BusinessName" value="@settings.BusinessName" />
-                        </label>
-                        <label>
-                            Email address
-                            <input type="email" name="Email" value="@settings.Email" />
-                        </label>
-                        <label>
-                            Phone number
-                            <input type="tel" name="Phone" value="@settings.Phone" />
-                        </label>
-                        <label>
-                            Campus location
-                            <input type="text" name="Campus" value="@settings.Campus" />
-                        </label>
-                        <label>
-                            Delivery radius
-                            <input type="text" name="DeliveryRadius" value="@settings.DeliveryRadius" />
-                        </label>
-                        <label>
-                            Store address
-                            <input type="text" name="Address" value="@settings.Address" />
-                        </label>
+            <!-- SETTINGS FORM -->
+            <form method="post"
+                  asp-action="SaveSettings"
+                  asp-controller="Home"
+                  class="settings-form">
+
+                <!-- BUSINESS -->
+                <section class="settings-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>Business Details</h2>
+                            <p>
+                                Information customers will see on your profile.
+                            </p>
+                        </div>
+
                     </div>
+
+                    <div class="settings-grid">
+
+                        <div class="input-group">
+                            <label>Business Name</label>
+
+                            <input type="text"
+                                   name="BusinessName"
+                                   value="@settings.BusinessName" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Email Address</label>
+
+                            <input type="email"
+                                   name="Email"
+                                   value="@settings.Email" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Phone Number</label>
+
+                            <input type="tel"
+                                   name="Phone"
+                                   value="@settings.Phone" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Campus Location</label>
+
+                            <input type="text"
+                                   name="Campus"
+                                   value="@settings.Campus" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Delivery Radius</label>
+
+                            <input type="text"
+                                   name="DeliveryRadius"
+                                   value="@settings.DeliveryRadius" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Store Address</label>
+
+                            <input type="text"
+                                   name="Address"
+                                   value="@settings.Address" />
+                        </div>
+
+                    </div>
+
                 </section>
 
-                <section class="settings-section">
-                    <h2>Payout & payments</h2>
-                    <div class="form-grid">
-                        <label>
-                            Payout method
-                            <input type="text" name="PayoutMethod" value="@settings.PayoutMethod" />
-                        </label>
-                        <label>
-                            Bank name
-                            <input type="text" name="BankName" value="@settings.BankName" />
-                        </label>
-                        <label>
-                            Account number
-                            <input type="text" name="AccountNumber" value="@settings.AccountNumber" />
-                        </label>
+                <!-- PAYOUT -->
+                <section class="settings-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>Payout & Payments</h2>
+                            <p>
+                                Update banking and payout information.
+                            </p>
+                        </div>
+
                     </div>
+
+                    <div class="settings-grid">
+
+                        <div class="input-group">
+                            <label>Payout Method</label>
+
+                            <input type="text"
+                                   name="PayoutMethod"
+                                   value="@settings.PayoutMethod" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Bank Name</label>
+
+                            <input type="text"
+                                   name="BankName"
+                                   value="@settings.BankName" />
+                        </div>
+
+                        <div class="input-group">
+                            <label>Account Number</label>
+
+                            <input type="text"
+                                   name="AccountNumber"
+                                   value="@settings.AccountNumber" />
+                        </div>
+
+                    </div>
+
                 </section>
 
-                <section class="settings-section">
-                    <h2>Notifications</h2>
-                    <div class="form-grid">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="NotificationEmail" @(settings.NotificationEmail ? "checked" : "") />
-                            Receive email updates and order alerts
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="NotificationSms" @(settings.NotificationSms ? "checked" : "") />
-                            Receive SMS notifications
-                        </label>
+                <!-- NOTIFICATIONS -->
+                <section class="settings-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>Notifications</h2>
+                            <p>
+                                Control how Vendly contacts you.
+                            </p>
+                        </div>
+
                     </div>
+
+                    <div class="toggle-group">
+
+                        <label class="toggle-card">
+
+                            <div>
+                                <h4>Email Notifications</h4>
+
+                                <p>
+                                    Receive order alerts and updates by email.
+                                </p>
+                            </div>
+
+                            <input type="checkbox"
+                                   name="NotificationEmail"
+                                   @(settings.NotificationEmail ? "checked" : "") />
+
+                        </label>
+
+                        <label class="toggle-card">
+
+                            <div>
+                                <h4>SMS Notifications</h4>
+
+                                <p>
+                                    Get delivery and inquiry updates via SMS.
+                                </p>
+                            </div>
+
+                            <input type="checkbox"
+                                   name="NotificationSms"
+                                   @(settings.NotificationSms ? "checked" : "") />
+
+                        </label>
+
+                    </div>
+
                 </section>
 
+                <!-- ACTIONS -->
                 <div class="settings-actions">
-                    <button type="submit" class="btn-primary">Save settings</button>
-                    <a class="btn-secondary" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">View business profile</a>
+
+                    <button type="submit" class="primary-btn save-btn">
+
+                        Save Settings
+
+                    </button>
+
+                    <a class="secondary-btn"
+                       href="@Url.Action("SellerDashboard", "Home")">
+
+                        Cancel
+
+                    </a>
+
                 </div>
+
             </form>
+
         </main>
+
     </div>
+
 </body>
 </html>
