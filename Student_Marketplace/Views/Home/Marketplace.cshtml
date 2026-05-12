@@ -1,566 +1,130 @@
 @{
-    ViewBag.Title = "Vendly Marketplace";
     Layout = null;
-    var userName = ViewBag.UserName ?? "Guest";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewBag.Title</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=DM+Sans:wght@400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
-    <link href="~/css/LandingPage.css" rel="stylesheet" />
-    <link href="~/css/Marketplace.css" rel="stylesheet" />
-</head>
 
+<link rel="stylesheet" href="~/css/marketplace.css" />
 
-<body>
-    <div class="market-dashboard">
-        <div class="page-navigation">
-            <div class="nav-panel-header">
-                <p class="nav-panel-copy">Quick access to core pages, seller tools, and upcoming features—so you can move through the marketplace faster.</p>
+<div class="marketplace-page">
+
+    <!-- FLOATING HEADER -->
+    <header class="market-header">
+
+        <div class="header-top">
+
+            <div class="brand">
+                Vendly.
             </div>
-            <div class="nav-section">
-                <h4 class="nav-section-title">🏠 Core Pages</h4>
-                <p class="nav-description">Navigate to the main user-facing pages for browsing, signing in, and marketplace access.</p>
-                <div class="nav-buttons-grid">
-                    <a class="nav-page-btn" href="@Url.Action("Index", "Home")">
-                        <span class="nav-icon">🏠</span>
-                        <span class="nav-label">Landing Page</span>
-                    </a>
-                    <a class="nav-page-btn" href="@Url.Action("Auth", "Home")">
-                        <span class="nav-icon">🔐</span>
-                        <span class="nav-label">Authentication</span>
-                    </a>
-                    <a class="nav-page-btn nav-current" href="@Url.Action("Marketplace", "Home")">
-                        <span class="nav-icon">🛒</span>
-                        <span class="nav-label">Marketplace</span>
-                    </a>
+
+            <div class="profile-wrapper">
+
+                <div class="profile-box" id="profileBox">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M20 21C20 17.5 16.9 15 12 15C7.1 15 4 17.5 4 21"/>
+                        <circle cx="12" cy="8" r="4"/>
+                    </svg>
+
                 </div>
+
+                <div class="profile-dropdown" id="profileDropdown">
+
+                    <a href="#">Profile</a>
+                    <a href="#">Cart</a>
+                    <a href="#">Orders</a>
+                    <a href="#">Stores</a>
+                    <a href="#">Chats</a>
+
+                </div>
+
             </div>
 
-            <div class="nav-section">
-                <h4 class="nav-section-title">👨‍💼 Seller Pages</h4>
-                <p class="nav-description">Manage your business profile and seller dashboard with quick links.</p>
-                <div class="nav-buttons-grid">
-                    <a class="nav-page-btn" href="@Url.Action("Profile", "Home", new { sellerId = "demo-seller" })">
-                        <span class="nav-icon">🏪</span>
-                        <span class="nav-label">Business Profile</span>
-                    </a>
-                    <a class="nav-page-btn" href="@Url.Action("SellerDashboard", "Home")">
-                        <span class="nav-icon">📊</span>
-                        <span class="nav-label">Seller Dashboard</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="nav-section">
-                <h4 class="nav-section-title">🔮 Future Pages</h4>
-                <p class="nav-description">These upcoming features are planned for the next release of the marketplace.</p>
-                <div class="nav-buttons-grid">
-                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Messages page - Coming Soon!')">
-                        <span class="nav-icon">💬</span>
-                        <span class="nav-label">Messages</span>
-                    </a>
-                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Orders page - Coming Soon!')">
-                        <span class="nav-icon">📦</span>
-                        <span class="nav-label">My Orders</span>
-                    </a>
-                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Wishlist page - Coming Soon!')">
-                        <span class="nav-icon">❤️</span>
-                        <span class="nav-label">Wishlist</span>
-                    </a>
-                    <a class="nav-page-btn" href="@Url.Action("Settings", "Home")">
-                        <span class="nav-icon">⚙️</span>
-                        <span class="nav-label">Account Settings</span>
-                    </a>
-                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Help page - Coming Soon!')">
-                        <span class="nav-icon">❓</span>
-                        <span class="nav-label">Help & Support</span>
-                    </a>
-                    <a class="nav-page-btn nav-future" href="#" onclick="alert('Admin page - Coming Soon!')">
-                        <span class="nav-icon">👑</span>
-                        <span class="nav-label">Admin Panel</span>
-                    </a>
-                </div>
-            </div>
         </div>
-        <header class="market-hero">
-            <div class="hero-copy">
-                <p class="hero-tag">DUT Student Marketplace</p>
-                <h1>Welcome back, @userName</h1>
-                <p class="hero-description">Find verified student sellers, services, and campus deals across Durban and Midlands campuses.</p>
-                <p class="hero-note">Use the search bar to quickly find student sellers, products, and campus-specific deals.</p>
+
+        <div class="hero-content">
+
+            <h1>Find what students are selling.</h1>
+
+            <p>
+                Browse marketplace listings from students across your campus.
+            </p>
+
+            <div class="search-bar">
+
+                <input type="text" placeholder="Search products..." />
+
+                <button>
+                    Search
+                </button>
+
             </div>
-            <div class="hero-actions">
-                <div class="search-bar">
-                    <input type="text" placeholder="Search keywords, business names, or product types" />
-                    <button type="button">Search</button>
-                </div>
-                <div class="campus-toggle">
-                    <label for="campusSelect">Campus filter</label>
-                    <select id="campusSelect">
-                        <option>All Campuses</option>
-                        <option>Durban Campuses</option>
-                        <option>Midlands Campus</option>
-                    </select>
-                </div>
+
+        </div>
+
+    </header>
+
+    <!-- RESULTS -->
+    <main class="results-section">
+
+        <div class="listing-card">
+
+            <div class="listing-image"></div>
+
+            <div class="listing-info">
+
+                <h3>MacBook Air M1</h3>
+
+                <p class="price">R12 500</p>
+
+                <p class="meta">
+                    UJ Auckland Park
+                </p>
+
             </div>
-        </header>
 
-        <main class="market-main">
-            <aside class="market-sidebar">
-                <div class="filter-card">
-                    <div class="filter-card-header">
-                        <h2>Refine search</h2>
-                        <span>Sort and filter listings</span>
-                    </div>
-                    <div class="filter-section">
-                        <p class="filter-title">Category</p>
-                        <div class="pill-row">
-                            <button type="button" class="pill active">Products</button>
-                            <button type="button" class="pill">Services</button>
-                        </div>
-                    </div>
-                    <div class="filter-section">
-                        <p class="filter-title">Products</p>
-                        <label><input type="checkbox" /> Clothing</label>
-                        <label><input type="checkbox" /> Food</label>
-                        <label><input type="checkbox" /> Textbooks</label>
-                    </div>
-                    <div class="filter-section">
-                        <p class="filter-title">Services</p>
-                        <label><input type="checkbox" /> Tutoring</label>
-                        <label><input type="checkbox" /> Graphic Design</label>
-                        <label><input type="checkbox" /> Hair Styling</label>
-                    </div>
-                    <div class="filter-section">
-                        <p class="filter-title">Price range</p>
-                        <div class="price-range">
-                            <input type="range" min="0" max="1500" value="1200" />
-                            <div class="price-labels">
-                                <span>R0</span>
-                                <span>R1500</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-section">
-                        <p class="filter-title">Sort by</p>
-                        <select>
-                            <option>Newest</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                            <option>Highest Rated</option>
-                        </select>
-                    </div>
-                </div>
-            </aside>
+        </div>
 
-            <section class="market-content">
-                <section class="featured-panel">
-                    <div class="section-heading">
-                        <div>
-                            <h2>Featured & Promoted</h2>
-                            <p>Premium listings and top rated entrepreneurs.</p>
-                        </div>
-                        <button type="button">View all</button>
-                    </div>
-                    <div class="featured-scroll">
-                        <article class="featured-card">
-                            <p class="badge">Premium</p>
-                            <h3>Campus Eats Delivery</h3>
-                            <p>Fast food bundles for students.</p>
-                            <span>⭐ 4.9</span>
-                        </article>
-                        <article class="featured-card">
-                            <p class="badge">Top Rated</p>
-                            <h3>Study Buddy Tutors</h3>
-                            <p>Verified academic coaching.</p>
-                            <span>⭐ 4.8</span>
-                        </article>
-                        <article class="featured-card">
-                            <p class="badge">Premium</p>
-                            <h3>Graphic Design Studio</h3>
-                            <p>Posters, menus, branding.</p>
-                            <span>⭐ 4.7</span>
-                        </article>
-                    </div>
-                </section>
+        <div class="listing-card">
 
-                <div class="market-banners">
-                    <div class="banner-card banner-ambassador">
-                        <strong>Ambassador Program</strong>
-                        <p>Invite friends and earn campus credit for every successful referral.</p>
-                    </div>
-                    <div class="banner-card banner-safety">
-                        <strong>Verified DUT Network</strong>
-                        <p>All listings are reviewed for a safe student-only marketplace experience.</p>
-                    </div>
-                </div>
+            <div class="listing-image"></div>
 
-                <section class="listing-grid-section">
-                    <div class="section-heading">
-                        <div>
-                            <h2>Popular Listings</h2>
-                            <p>Browse top student offers by category and rating.</p>
-                        </div>
-                    </div>
+            <div class="listing-info">
 
-                    <div class="listing-grid">
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Secondhand Textbooks</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R220</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "thabo-seller" })" class="seller-link">Thabo</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.8 (12 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Phone Repair Service</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R180</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "zinhle-seller" })" class="seller-link">Zinhle</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.9 (18 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Graphic Design Bundle</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R350</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "innocent-seller" })" class="seller-link">Innocent</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.7 (24 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1534751516642-a1af1ef134f0?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Math Tutoring Sessions</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R130</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "siya-seller" })" class="seller-link">Siya</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.8 (20 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1505373377-b28d0ce3604d?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Student Laptop Stand</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R95</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "amara-seller" })" class="seller-link">Amara</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.6 (8 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1568640347023-a616a30a3331?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Essay Writing Assistance</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R250</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "dr-nkosi-seller" })" class="seller-link">Dr. Nkosi</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.9 (42 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561188?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Vintage Clothing & Accessories</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R150</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "fatima-seller" })" class="seller-link">Fatima</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.7 (15 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69b13d835?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Photography Services</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R400</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "mthunzi-seller" })" class="seller-link">Mthunzi</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.8 (31 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1564069114553-7215820c3a86?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Homemade Meal Prep</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R80</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "nomsa-seller" })" class="seller-link">Nomsa</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.9 (67 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1516628819585-d659410dbb3f?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Web Design & Development</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R600</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "lerato-seller" })" class="seller-link">Lerato</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.8 (19 reviews)</p>
-                            </div>
-                        </article>
-                        <article class="listing-card">
-                            <div class="listing-thumb" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80');"></div>
-                            <div class="listing-card-body">
-                                <div class="listing-title-row">
-                                    <h3>Chemistry Lab Notes</h3>
-                                    <button class="bookmark">♥</button>
-                                </div>
-                                <p class="listing-price">R45</p>
-                                <p class="listing-seller">by <a href="@Url.Action("Profile", "Home", new { sellerId = "kabelo-seller" })" class="seller-link">Kabelo</a> <span class="verified">✔</span></p>
-                                <p class="listing-trust">⭐ 4.5 (5 reviews)</p>
-                            </div>
-                        </article>
-                    </div>
-                </section>
-            </section>
-        </main>
-    </div>
+                <h3>Accounting Textbooks</h3>
 
-    <script>
-        // Marketplace functionality
-        const marketplaceApp = (() => {
-            // State management
-            const state = {
-                selectedCategory: 'products',
-                selectedFilters: {
-                    products: [],
-                    services: [],
-                    campus: 'all'
-                },
-                maxPrice: 1200,
-                sortBy: 'newest',
-                bookmarks: new Set()
-            };
+                <p class="price">R850</p>
 
-            // Initialize on page load
-            function init() {
-                attachEventListeners();
-                loadBookmarks();
-            }
+                <p class="meta">
+                    Wits Braamfontein
+                </p>
 
-            // Category pill toggle
-            function attachEventListeners() {
-                // Category pills
-                document.querySelectorAll('.pill').forEach(pill => {
-                    pill.addEventListener('click', (e) => handleCategoryChange(e.target));
-                });
+            </div>
 
-                // Product checkboxes
-                document.querySelectorAll('.filter-section:nth-of-type(2) input[type="checkbox"]').forEach(checkbox => {
-                    checkbox.addEventListener('change', () => updateFilters('products'));
-                });
+        </div>
 
-                // Service checkboxes
-                document.querySelectorAll('.filter-section:nth-of-type(3) input[type="checkbox"]').forEach(checkbox => {
-                    checkbox.addEventListener('change', () => updateFilters('services'));
-                });
+    </main>
 
-                // Price range
-                const priceSlider = document.querySelector('.price-range input[type="range"]');
-                if (priceSlider) {
-                    priceSlider.addEventListener('input', (e) => handlePriceChange(e.target.value));
-                }
+</div>
 
-                // Sort dropdown
-                const sortSelect = document.querySelector('.filter-section:last-of-type select');
-                if (sortSelect) {
-                    sortSelect.addEventListener('change', (e) => handleSort(e.target.value));
-                }
+<script>
 
-                // Campus filter
-                document.getElementById('campusSelect')?.addEventListener('change', (e) => {
-                    state.selectedFilters.campus = e.target.value;
-                    filterListings();
-                });
+    const profileBox = document.getElementById("profileBox");
+    const dropdown = document.getElementById("profileDropdown");
 
-                // Search button
-                document.querySelector('.search-bar button')?.addEventListener('click', () => handleSearch());
+    profileBox.addEventListener("click", () => {
 
-                // Search on Enter key
-                document.querySelector('.search-bar input')?.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') handleSearch();
-                });
+        dropdown.classList.toggle("active");
 
-                // Bookmark buttons
-                document.querySelectorAll('.bookmark').forEach((btn, idx) => {
-                    btn.addEventListener('click', (e) => toggleBookmark(e.target, idx));
-                });
+    });
 
-                // View all button
-                document.querySelector('.section-heading button')?.addEventListener('click', () => {
-                    alert('View all featured listings');
-                });
-            }
+    window.addEventListener("click", (e) => {
 
-            function handleCategoryChange(pill) {
-                // Remove active class from all pills
-                document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-                // Add active class to clicked pill
-                pill.classList.add('active');
-                // Update state
-                state.selectedCategory = pill.textContent.toLowerCase();
-                filterListings();
-            }
+        if (
+            !profileBox.contains(e.target) &&
+            !dropdown.contains(e.target)
+        ) {
+            dropdown.classList.remove("active");
+        }
 
-            function updateFilters(type) {
-                const section = type === 'products' ? 2 : 3;
-                const checkboxes = document.querySelectorAll(`.filter-section:nth-of-type(${section}) input[type="checkbox"]`);
-                state.selectedFilters[type] = Array.from(checkboxes)
-                    .filter(cb => cb.checked)
-                    .map(cb => cb.parentElement.textContent.trim());
-                filterListings();
-            }
+    });
 
-            function handlePriceChange(value) {
-                state.maxPrice = parseInt(value);
-                document.querySelector('.price-range .price-labels span:nth-of-type(2)').textContent = `R${value}`;
-                filterListings();
-            }
-
-            function handleSort(sortValue) {
-                state.sortBy = sortValue;
-                sortListings();
-            }
-
-            function handleSearch() {
-                const query = document.querySelector('.search-bar input').value.toLowerCase();
-                if (query.trim() === '') {
-                    filterListings();
-                    return;
-                }
-                document.querySelectorAll('.listing-card').forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const seller = card.querySelector('.listing-seller').textContent.toLowerCase();
-                    const matches = title.includes(query) || seller.includes(query);
-                    card.style.display = matches ? 'block' : 'none';
-                });
-            }
-
-            function filterListings() {
-                document.querySelectorAll('.listing-card').forEach(card => {
-                    // Get card data
-                    const title = card.querySelector('h3').textContent;
-                    const price = parseInt(card.querySelector('.listing-price').textContent.replace('R', ''));
-                    const type = ['Textbooks', 'Clothing', 'Phone', 'Food'].some(t => title.includes(t)) ? 'products' : 'services';
-
-                    // Check category
-                    if (state.selectedCategory !== type) {
-                        card.style.display = 'none';
-                        return;
-                    }
-
-                    // Check price
-                    if (price > state.maxPrice) {
-                        card.style.display = 'none';
-                        return;
-                    }
-
-                    // Check filters
-                    const hasFilter = state.selectedFilters[state.selectedCategory].length > 0;
-                    if (hasFilter && !state.selectedFilters[state.selectedCategory].some(f => title.includes(f))) {
-                        card.style.display = 'none';
-                        return;
-                    }
-
-                    card.style.display = 'block';
-                });
-            }
-
-            function sortListings() {
-                const grid = document.querySelector('.listing-grid');
-                const cards = Array.from(grid.querySelectorAll('.listing-card')).filter(c => c.style.display !== 'none');
-
-                cards.sort((a, b) => {
-                    const titleA = a.querySelector('h3').textContent;
-                    const titleB = b.querySelector('h3').textContent;
-                    const priceA = parseInt(a.querySelector('.listing-price').textContent.replace('R', ''));
-                    const priceB = parseInt(b.querySelector('.listing-price').textContent.replace('R', ''));
-                    const ratingA = parseFloat(a.querySelector('.listing-trust').textContent);
-                    const ratingB = parseFloat(b.querySelector('.listing-trust').textContent);
-
-                    switch (state.sortBy) {
-                        case 'Price: Low to High':
-                            return priceA - priceB;
-                        case 'Price: High to Low':
-                            return priceB - priceA;
-                        case 'Highest Rated':
-                            return ratingB - ratingA;
-                        case 'Newest':
-                        default:
-                            return 0;
-                    }
-                });
-
-                cards.forEach(card => grid.appendChild(card));
-            }
-
-            function toggleBookmark(btn, idx) {
-                const key = `listing-${idx}`;
-                if (state.bookmarks.has(key)) {
-                    state.bookmarks.delete(key);
-                    btn.textContent = '♥';
-                    btn.style.opacity = '0.6';
-                } else {
-                    state.bookmarks.add(key);
-                    btn.textContent = '♥';
-                    btn.style.opacity = '1';
-                    btn.style.color = '#e91e63';
-                }
-                saveBookmarks();
-            }
-
-            function saveBookmarks() {
-                localStorage.setItem('vendly-bookmarks', JSON.stringify(Array.from(state.bookmarks)));
-            }
-
-            function loadBookmarks() {
-                const saved = localStorage.getItem('vendly-bookmarks');
-                if (saved) {
-                    state.bookmarks = new Set(JSON.parse(saved));
-                    document.querySelectorAll('.bookmark').forEach((btn, idx) => {
-                        if (state.bookmarks.has(`listing-${idx}`)) {
-                            btn.style.opacity = '1';
-                            btn.style.color = '#e91e63';
-                        }
-                    });
-                }
-            }
-
-            return { init };
-        })();
-
-        // Initialize when DOM is ready
-        document.addEventListener('DOMContentLoaded', marketplaceApp.init);
-    </script>
-</body>
-</html>
+</script>
