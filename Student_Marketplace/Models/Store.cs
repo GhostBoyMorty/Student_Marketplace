@@ -8,21 +8,22 @@ namespace Student_Marketplace.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(150)]
         public string StoreName { get; set; } = string.Empty;
 
         public string? Description { get; set; }
 
-        public string? StorePassword { get; set; }
-
         public string? LogoUrl { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [Required]
+        public int OwnerId { get; set; }           // Foreign Key
+        public User Owner { get; set; } = null!;
 
-        // Foreign key — links store to the user who created it
-        public int UserId { get; set; }
-        public User? User { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        // Navigation — a store can have many listings
+        public bool IsActive { get; set; } = true;
+
+        // Navigation
         public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

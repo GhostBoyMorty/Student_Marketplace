@@ -1,17 +1,28 @@
-namespace Student_Marketplace.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class Order
+namespace Student_Marketplace.Models
 {
+    public class Order
+    {
+        [Key]
+        public int Id { get; set; }
 
-    public int Id { get; set; }
-    public int Quantity { get; set; } = 1;
-    public string Status { get; set; } = "Pending";
-    public decimal TotalAmount { get; set; }
-    public DateTime OrderDate { get; set; } = DateTime.UtcNow;
+        public int BuyerId { get; set; }
 
-    public string ProductId { get; set; } = string.Empty;
-    public Product? Product { get; set; }
+        public User Buyer { get; set; } = null!;
 
-    public int BuyerId { get; set; }
-    public User? Buyer { get; set; } 
+        public decimal TotalAmount { get; set; }
+
+        public string Status { get; set; } = "Pending";
+
+        public DateTime OrderDate { get; set; }
+            = DateTime.UtcNow;
+
+        /// <summary>
+        /// Gets or sets the order items associated with this order.
+        /// </summary>
+        public ICollection<OrderItem> OrderItems
+            { get; set; }
+            = new List<OrderItem>();
+    }
 }

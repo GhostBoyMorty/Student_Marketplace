@@ -37,27 +37,25 @@
                     <span>UP</span>
                 </div>
 
-                <input type="email"
-                       name="email"
-                       placeholder="Email" />
+                <input type="email" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" />
 
-                <input type="password"
-                       name="password"
-                       placeholder="Password" />
+                <a href="#" class="forgot">Forgot your password?</a>
 
-                <a href="#" class="forgot">
-                    Forgot your password?
-                </a>
+                <button type="submit">SIGN IN</button>
 
-                <button type="submit">
-                    SIGN IN
-                </button>
-
+                <!-- Switch to Sign Up -->
                 <p class="switch-text">
-                    Don’t have an account?
-                    <span id="showSignUp">
-                        Sign Up
-                    </span>
+                    Don’t have an account? 
+                    <span id="showSignUp">Sign Up</span>
+                </p>
+
+                <!-- Continue as Guest - Moved below -->
+                <p class="guest-opt">
+                    Or continue as 
+                    <a asp-controller="Home" asp-action="Dashboard" id="showGuest">
+                        Guest
+                    </a>
                 </p>
 
             </form>

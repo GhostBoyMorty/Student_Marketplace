@@ -1,0 +1,530 @@
+@{
+    ViewData["Title"] = "Vendly Dashboard";
+}
+
+<link rel="stylesheet" href="~/css/dashboard.css" />
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    V
+                </div>
+
+                <div>
+                    <h2>Vendly</h2>
+                    <span>Student Marketplace</span>
+                </div>
+
+            </div>
+
+            <nav class="nav-menu">
+
+                <a class="active" href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M3 11L12 4L21 11V20H3V11Z"/>
+                    </svg>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+                <a asp-action="Profile" asp-controller="Home">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20C4 16.5 7 14 12 14C17 14 20 16.5 20 20"/>
+                    </svg>
+
+                    <span>Profile</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M4 7H20"/>
+                        <path d="M7 12H17"/>
+                        <path d="M9 17H15"/>
+                    </svg>
+
+                    <span>Orders</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15C21 16.1 20.1 17 19 17H7L3 21V5C3 3.9 3.9 3 5 3H19C20.1 3 21 3.9 21 5V15Z"/>
+                    </svg>
+
+                    <span>Chat</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="9" cy="8" r="3"/>
+                        <circle cx="17" cy="10" r="3"/>
+                        <path d="M2 20C2 16.5 5 14 9 14"/>
+                        <path d="M14 20C14 17.5 15.5 15.8 18 15"/>
+                    </svg>
+
+                    <span>Employee</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="9" cy="20" r="1"/>
+                        <circle cx="18" cy="20" r="1"/>
+                        <path d="M3 4H5L7 15H19L21 7H8"/>
+                    </svg>
+
+                    <span>Cart</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M16 2V6"/>
+                        <path d="M8 2V6"/>
+                        <path d="M3 10H21"/>
+                    </svg>
+
+                    <span>Varsity Cal</span>
+
+                </a>
+
+                <a href="#">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15A1.6 1.6 0 0 0 20 13.6L21 12L20 10.4A1.6 1.6 0 0 0 19.4 9L18 8L17 6.6A1.6 1.6 0 0 0 15.6 6L14 5H10L8.4 6A1.6 1.6 0 0 0 7 6.6L6 8L4.6 9A1.6 1.6 0 0 0 4 10.4L3 12L4 13.6A1.6 1.6 0 0 0 4.6 15L6 16L7 17.4A1.6 1.6 0 0 0 8.4 18L10 19H14L15.6 18A1.6 1.6 0 0 0 17 17.4L18 16L19.4 15Z"/>
+                    </svg>
+
+                    <span>Settings</span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <a href="#" class="logout-btn">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 21H5C3.9 21 3 20.1 3 19V5C3 3.9 3.9 3 5 3H9"/>
+                <path d="M16 17L21 12L16 7"/>
+                <path d="M21 12H9"/>
+            </svg>
+
+            Logout
+
+        </a>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="M20 20L17 17"/>
+                </svg>
+
+                <input type="text" placeholder="Search products, stores, events..." />
+
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M4 4H20V16H4V4Z"/>
+                        <path d="M22 6L12 13L2 6"/>
+                    </svg>
+
+                    <span class="badge">3</span>
+
+                </button>
+
+                <button class="icon-btn">
+
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 8A6 6 0 0 0 6 8C6 15 3 17 3 17H21C21 17 18 15 18 8"/>
+                        <path d="M13.7 21A2 2 0 0 1 10.3 21"/>
+                    </svg>
+
+                    <span class="badge">5</span>
+
+                </button>
+
+                <div class="profile-card">
+
+                    <div class="avatar">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M4 20C4 16.5 7 14 12 14C17 14 20 16.5 20 20"/>
+                        </svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Username</h4>
+                        <p>school@email.com</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- HERO -->
+
+        <section class="hero-banner">
+
+            <div class="hero-text">
+
+                <span class="hero-label">
+                    STUDENT MARKETPLACE
+                </span>
+
+                <h1>
+                    Welcome back, Username 👋
+                </h1>
+
+                <p>
+                    Explore trending products, discover student stores,
+                    and stay updated with upcoming campus events.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="primary-btn">
+                        Explore Marketplace
+                    </button>
+
+                    <button class="secondary-btn">
+                        Upcoming Events
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="hero-illustration">
+
+                <svg viewBox="0 0 500 400" fill="none">
+
+                    <rect x="120" y="80" width="250" height="170" rx="24"/>
+                    <circle cx="200" cy="160" r="32"/>
+                    <path d="M180 230C180 205 205 190 245 190C285 190 310 205 310 230"/>
+
+                    <rect x="80" y="270" width="140" height="70" rx="20"/>
+                    <rect x="250" y="270" width="170" height="70" rx="20"/>
+
+                </svg>
+
+            </div>
+
+        </section>
+
+        <!-- TRENDING -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Trending Products</h2>
+
+                <a href="#">View all</a>
+
+            </div>
+
+            <div class="product-grid">
+
+                <div class="product-card">
+
+                    <div class="product-image blue"></div>
+
+                    <div class="product-content">
+
+                        <h4>MacBook Air M1</h4>
+
+                        <p class="price">R12 500</p>
+
+                        <span class="card-tag">
+                            Trending
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="product-card">
+
+                    <div class="product-image purple"></div>
+
+                    <div class="product-content">
+
+                        <h4>Graphic Hoodie</h4>
+
+                        <p class="price">R850</p>
+
+                        <span class="card-tag purple-tag">
+                            Popular
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="product-card">
+
+                    <div class="product-image pink"></div>
+
+                    <div class="product-content">
+
+                        <h4>iPhone 14</h4>
+
+                        <p class="price">R15 000</p>
+
+                        <span class="card-tag">
+                            Hot
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- NEW PRODUCTS -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>New Products</h2>
+
+                <a href="#">Browse more</a>
+
+            </div>
+
+            <div class="product-grid">
+
+                <div class="product-card small-card">
+
+                    <div class="product-image mint"></div>
+
+                    <div class="product-content">
+
+                        <h4>Desk Lamp</h4>
+
+                        <p class="price">R300</p>
+
+                    </div>
+
+                </div>
+
+                <div class="product-card small-card">
+
+                    <div class="product-image orange"></div>
+
+                    <div class="product-content">
+
+                        <h4>Accounting Books</h4>
+
+                        <p class="price">R450</p>
+
+                    </div>
+
+                </div>
+
+                <div class="product-card small-card">
+
+                    <div class="product-image blue">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="4" y="5" width="16" height="14" rx="2"/>
+                            <path d="M8 9H16"/>
+                            <path d="M8 13H13"/>
+                        </svg>
+
+                    </div>
+
+                    <div class="product-content">
+
+                        <h4>Gaming Mouse</h4>
+
+                        <p class="price">R700</p>
+
+                    </div>
+
+                </div>
+
+                <div class="product-card small-card">
+
+                    <div class="product-image purple"></div>
+
+                    <div class="product-content">
+
+                        <h4>Mini Speaker</h4>
+
+                        <p class="price">R520</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LOWER BANNERS -->
+
+        <section class="bottom-layout">
+
+            <!-- VARSITY EVENTS -->
+
+            <div class="event-banner">
+
+                <div class="banner-header">
+
+                    <h3>Varsity Events</h3>
+
+                    <a href="#">Open Calendar</a>
+
+                </div>
+
+                <div class="event-card">
+
+                    <div>
+                        <h4>Student Market Day</h4>
+                        <p>Free entry • Howard Campus</p>
+                    </div>
+
+                    <span>MAY 18</span>
+
+                </div>
+
+                <div class="event-card">
+
+                    <div>
+                        <h4>Music & Chill Night</h4>
+                        <p>Free drinks for first 50 students</p>
+                        <p class="event-meta">
+                            Free Entry
+                        </p>
+                    </div>
+
+                    <span>MAY 22</span>
+
+                </div>
+
+                <div class="event-card">
+
+                    <div>
+                        <h4>Tech Career Expo</h4>
+                        <p>Networking & internship opportunities</p>
+                    </div>
+
+                    <span>JUN 02</span>
+
+                </div>
+
+
+            </div>
+
+            <!-- TRENDING STORES -->
+
+            <div class="store-banner">
+
+                <div class="banner-header">
+
+                    <h3>Trending Stores</h3>
+
+                    <a href="#">See stores</a>
+
+                </div>
+
+                <div class="store-item">
+
+                    <div class="store-icon blue-store">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M4 7L6 3H18L20 7"/>
+                            <rect x="5" y="7" width="14" height="13" rx="2"/>
+                        </svg>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Snack Hub</h4>
+                        <p>Campus snacks & drinks</p>
+
+                    </div>
+
+                </div>
+
+                <div class="store-item">
+
+                    <div class="store-icon purple-store"></div>
+
+                    <div>
+
+                        <h4>Fashion Plug</h4>
+                        <p>Trending varsity fits</p>
+
+                    </div>
+
+                </div>
+
+                <div class="store-item">
+
+                    <div class="store-icon pink-store"></div>
+
+                    <div>
+
+                        <h4>Tech Point</h4>
+                        <p>Affordable gadgets & accessories</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>

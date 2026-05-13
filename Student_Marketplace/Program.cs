@@ -1,4 +1,3 @@
-using Student_Marketplace.Hubs;
 using Student_Marketplace.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,7 +33,6 @@ namespace Student_Marketplace
             app.UseRouting();
 
             app.UseAuthorization();
-            app.MapHub<ChatHub>("/chatHub");
 
             app.MapControllerRoute(
                 name: "default",
