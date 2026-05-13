@@ -172,16 +172,16 @@ body::after{
 
     border-radius: 34px;
 
-    background:
-        rgba(255,255,255,0.72);
+    background: rgba(255,255,255,0.72);
 
-    backdrop-filter:blur(22px);
+    backdrop-filter: blur(22px);
 
     border:1px solid rgba(255,255,255,0.45);
 
     box-shadow:
         0 25px 80px rgba(15,23,42,0.18),
         0 10px 30px rgba(59,130,246,0.10);
+
     z-index:2;
 }
 
@@ -405,6 +405,19 @@ button:hover{
 }
 
 .switch-text span {
+    color: #2563eb;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.guest-opt {
+    margin-top: 16px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.guest-opt span {
     color: #2563eb;
     font-weight: 600;
     cursor: pointer;
@@ -725,21 +738,20 @@ body::marker{
     display:none;
 }
 
-.background-grid{
+/* Add this at the bottom of your CSS file */
+.guest-opt {
+    margin-top: 12px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13.5px;
+}
 
-    position:absolute;
+.guest-opt a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
 
-    inset:0;
-
-    background-image:
-        linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
-
-    background-size:60px 60px;
-
-    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
-
-    opacity:0.35;
-
-    z-index:0;
+.guest-opt a:hover {
+    text-decoration: underline;
 }
