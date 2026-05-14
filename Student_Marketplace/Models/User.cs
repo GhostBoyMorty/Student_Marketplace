@@ -24,6 +24,9 @@ namespace Student_Marketplace.Models
 
         public string? Bio { get; set; }
 
+        [Required]
+        public string StudentNumber { get; set; } = string.Empty;
+
         public DateTime DateJoined { get; set; } = DateTime.UtcNow;
 
         public bool IsVerified { get; set; } = false;

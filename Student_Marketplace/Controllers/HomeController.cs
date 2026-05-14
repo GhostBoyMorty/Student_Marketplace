@@ -1,17 +1,19 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Student_Marketplace.Data;
 using Student_Marketplace.Models;
+
 
 namespace Student_Marketplace.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly AppDbContext _context;
+        public HomeController(AppDbContext context)
         {
-            _logger = logger;
+            
+            _context = context;
         }
 
         public IActionResult Index()
@@ -22,6 +24,47 @@ namespace Student_Marketplace.Controllers
         public IActionResult Dashboard()
         {
             return View();
+        }
+
+        // ===============================================       REGISTER METHOD   ============================================================================
+
+        [HttpPost]
+        public IActionResult Register(string fullname, string email, string studentNumber, string password)
+        {
+            if (_context.Users.Any(u => u.Email == email))
+            {
+                ModelState.AddModelError("", "Email already exists.");
+                return View("Index");
+            }
+            else
+            {
+                var User = new User
+                {
+                    FullName = fullname,
+                    Email = email,
+                    StudentNumber = studentNumber,
+                    PasswordHash = password,
+                };
+                _context.Users.Add(User);
+                _context.SaveChanges();
+            }
+
+            return Index();
+        }
+
+        public IActionResult Login(string email, string password)
+        {
+            if(_context.Users.Any(u=> u.Email == email && u.PasswordHash == password))
+            {
+                // In a real application, you would set up authentication cookies or tokens here
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid email or password.");
+                return View("Index");
+            }
+            return View("Index");
         }
 
         public IActionResult Marketplace()
