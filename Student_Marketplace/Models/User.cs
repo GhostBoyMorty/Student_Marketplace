@@ -8,33 +8,35 @@ namespace Student_Marketplace.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string FullName { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [Required]
-        public string Password { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; }
 
         [Required]
-        public string StudentNumber { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
 
-        public string? Faculty { get; set; }
+        public string? ProfilePicture { get; set; }
 
-        public string? University { get; set; }
+        public string? Bio { get; set; }
 
-        public string? ProfileImage { get; set; }
+        public DateTime DateJoined { get; set; } = DateTime.UtcNow;
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsVerified { get; set; } = false;
 
-        // Navigation — one user can have one store (optional)
-        public Store? Store { get; set; }
-
-        // Navigation — one user can have many listings (without a store)
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-
-        // Navigation — one user can have many orders as a buyer
+        // Navigation Properties
+        public ICollection<Store> Stores { get; set; } = new List<Store>();
         public ICollection<Order> Orders { get; set; } = new List<Order>();
+        //public ICollection<ChatsM> ChatsSent { get; set; } = new List<ChatsM>();
+
+        public ICollection<Store> Store { get; set; } = new List<Store>();
+        public ICollection<Order> Order { get; set; } = new List<Order>();
+        
+        /*public ICollection<ChatsM> ChatsSentt { get; set; } = new List<ChatsM>();
+        public ICollection<ChatsM> ChatsReceived { get; set; } = new List<ChatsM>();*/
     }
 }

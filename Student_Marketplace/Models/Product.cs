@@ -8,30 +8,27 @@ namespace Student_Marketplace.Models
         public int Id { get; set; }
 
         [Required]
-        public string ProductName { get; set; } = string.Empty;
+        [StringLength(200)]
+        public string Name { get; set; } = string.Empty;
 
         public string? Description { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue)]
         public decimal Price { get; set; }
 
-        public int Quantity { get; set; } = 1;
+        public int Stock { get; set; } = 1;
 
         public string? ImageUrl { get; set; }
 
-        public string? Category { get; set; }
+        [Required]
+        public int StoreId { get; set; }
+        public Store Store { get; set; } = null!;
 
-        public bool IsAvailable { get; set; } = true;
+        public string Category { get; set; } = string.Empty;   // e.g., Electronics, Clothing, Food, etc.
 
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsActive { get; set; } = true;
 
-        // Foreign key — listing belongs to a user
-        public int UserId { get; set; }
-        public User? User { get; set; }
-
-        // Foreign key — listing optionally belongs to a store
-        // nullable because not every listing needs a store
-        public int? StoreId { get; set; }
-        public Store? Store { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

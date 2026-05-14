@@ -19,17 +19,22 @@ namespace Student_Marketplace.Controllers
             return View();
         }
 
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+
         public IActionResult Marketplace()
         {
             ViewBag.UserName = "Guest";
             return View();
         }
 
-        public IActionResult Auth()
+        public IActionResult Test()
         {
-            return View();
+            return Content("Test page working!");
         }
-
+        
         // PARTIAL LOADER. . .
         public IActionResult LoadPartial(string partial)
         {
@@ -120,7 +125,7 @@ namespace Student_Marketplace.Controllers
             return PartialView($"~/Views/Home/SellerPartials/_{partial}.cshtml");
         }
 
-        public IActionResult Profile(string sellerId)
+        public IActionResult Profile(string? sellerId)
         {
             // Mock seller data - in real app this would come from database
             var sellers = new Dictionary<string, object>
@@ -229,7 +234,8 @@ namespace Student_Marketplace.Controllers
                         new { Reviewer = "Lerato N.", Rating = 5, Comment = "Very professional and responsive.", Time = "2 weeks ago" }
                     }
                 },
-                ["siya-seller"] = new {
+                ["siya-seller"] = new
+                {
                     SellerId = "siya-seller",
                     BusinessName = "Siya's Math Tutoring",
                     AvatarUrl = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80",
@@ -255,6 +261,8 @@ namespace Student_Marketplace.Controllers
                         new { Reviewer = "Anele D.", Rating = 4, Comment = "Very patient and knowledgeable.", Time = "1 week ago" }
                     }
                 }
+                
+                
             };
 
             var sellerData = sellers.ContainsKey(sellerId ?? "demo-seller")

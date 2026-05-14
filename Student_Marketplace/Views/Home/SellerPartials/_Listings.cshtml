@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="~/css/DashboardPartials/listings.css" />
 
-
 @{
     var listings = ViewBag.Listings;
 }
@@ -11,6 +10,11 @@
         <h1>Listings</h1>
         <p>Manage your products</p>
     </div>
+
+    <button class="add-listing-btn"
+        onclick="document.getElementById('listingModal').classList.add('active')">
+        + Add Listing
+    </button>
 
 </div>
 
@@ -51,3 +55,119 @@
     </table>
 
 </div>
+
+<!-- LISTING MODAL
+
+<div class="listing-modal-overlay" id="listingModal">
+
+    <div class="listing-modal">
+
+        <div class="listing-modal-glow"></div>
+
+        <div class="listing-modal-header">
+
+            <div class="vendly-light">
+                VENDLY
+            </div>
+
+            <div class="close-modal" onclick="document.getElementById('listingModal').classList.remove('active')">
+                ✕
+            </div>
+
+        </div>
+
+        <h2>Add New Listing</h2>
+
+        <p class="modal-subtext">
+            Create a new product listing for the marketplace
+        </p>
+
+        <form asp-action="CreateListing"
+              asp-controller="Seller"
+              method="post"
+              enctype="multipart/form-data"
+              class="listing-form">
+
+            <div class="form-group">
+
+                <label>Item Name</label>
+
+                <input type="text"
+                       name="Title"
+                       placeholder="MacBook Air M2"
+                       required />
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea name="Description"
+                          rows="5"
+                          placeholder="Describe your product..."
+                          required></textarea>
+
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Price</label>
+
+                    <input type="number"
+                           name="Price"
+                           placeholder="5000"
+                           required />
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Picture</label>
+
+                    <input type="file"
+                           name="ImageFile"
+                           accept="image/*"
+                           required />
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="done-btn">
+                Done
+            </button>
+
+        </form> 
+
+    </div>
+    
+</div> -->
+
+<script>
+
+    const modal =
+        document.getElementById("listingModal");
+
+    const openBtn =
+        document.getElementById("openListingBtn");
+
+    if(openBtn){
+
+        openBtn.addEventListener("click", () => {
+
+            modal.classList.add("active");
+
+        });
+
+    }
+
+    function closeListingModal(){
+
+        modal.classList.remove("active");
+
+    }
+
+</script>
