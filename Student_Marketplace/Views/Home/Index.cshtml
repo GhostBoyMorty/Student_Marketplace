@@ -20,9 +20,7 @@
         <!-- SIGN IN -->
         <div class="form-container sign-in-container">
 
-            <form asp-action="Login" asp-controller="Account" method="post">
-
-                @Html.AntiForgeryToken()
+            <form asp-action="Login" asp-controller="Home" method="post">
 
                 <h1>Sign In</h1>
 
@@ -50,7 +48,6 @@
                     <span id="showSignUp">Sign Up</span>
                 </p>
 
-                <!-- Continue as Guest - Moved below -->
                 <p class="guest-opt">
                     Or continue as 
                     <a asp-controller="Home" asp-action="Dashboard" id="showGuest">
@@ -65,9 +62,7 @@
         <!-- SIGN UP. . .-->
         <div class="form-container sign-up-container">
 
-            <form asp-action="Register" asp-controller="Account" method="post" enctype="multipart/form-data">
-
-                @Html.AntiForgeryToken()
+            <form asp-action="Register" asp-controller="Home" method="post">
 
                 <h1>Create Account</h1>
 
@@ -152,7 +147,7 @@
 
                 </div>
 
-                <button type="submit">
+                <button type="submit" asp-action="Register" asp-controller="Home">
                     SIGN UP
                 </button>
 
